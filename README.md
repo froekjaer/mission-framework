@@ -1,57 +1,117 @@
 # Mission Framework
 
-> **Trust by Design**
+> **From Need to Value**
 
-Mission Framework is an open architecture for building trusted, mission-oriented knowledge and intelligence systems.
+Mission Framework is an open architectural foundation for understanding, designing and improving missions that create meaningful, trustworthy value.
 
-It is designed for people and organisations that need to transform observations into knowledge, decisions and action while preserving evidence, provenance and human accountability.
+Its purpose is simple:
 
-Mission Framework is not an application, an AI model or a cloud platform. It is an architectural foundation.
+> **Create what is needed, and make it accessible to those who need it.**
 
-## Vision
-
-Build a reusable framework where humans and technology collaborate to create trusted knowledge.
-
-Every mission is different. The principles should not be.
+Architecture, governance, security and technology are essential, but they are means rather than ends. They exist to help genuine needs become sustainable value.
 
 ## Why Mission Framework?
 
-Technology evolves continuously. Programming languages, cloud providers, AI models and hardware change.
+People, organisations and societies continuously face the same fundamental challenge:
 
-Trust must survive all of them.
+> **How do we transform genuine needs into lasting value?**
 
-Mission Framework therefore focuses on architecture before implementation and principles before technology.
+Technology changes. Organisations change. Methods change.
+
+The underlying challenge remains.
+
+Mission Framework therefore begins with need, grounds decisions in reality, justifies trust through evidence and uses architecture to enable missions.
+
+## Purpose before Architecture
+
+Mission Framework was not created to define architecture for its own sake.
+
+It was not created to define governance for its own sake.
+
+It was not created to define technology for its own sake.
+
+It exists to help people create what is genuinely needed and make that value available to those who need it—responsibly, transparently and sustainably.
 
 ## Trust by Design
 
-Mission Framework is built around one primary architectural principle:
+Trust remains a foundational architectural principle:
 
-> Every component, workflow, AI interaction and architectural decision should be evaluated by one question: **Does it increase or decrease trust?**
+> Every component, workflow, AI interaction and architectural decision should be evaluated by one question: **Does it increase or decrease justified trust?**
 
-Trust is not assumed. It is engineered, maintained and continuously evaluated.
+Trust is not assumed. It is earned through evidence, competence, transparency, consistency and human accountability.
+
+## Reality before Models
+
+Reality is the final authority.
+
+Models, architectures and conclusions must remain connected to observable reality through evidence and provenance. When reality contradicts the model, the model must change.
 
 ## Knowledge before Intelligence
 
-Data alone has limited value. Information provides context. Knowledge provides understanding. Intelligence supports decisions.
+Data alone has limited value. Information provides context. Knowledge supports understanding. Intelligence supports decisions.
 
 Mission Framework supports that complete journey without transferring accountability away from people.
-
-## Human and AI
 
 AI may accelerate discovery, analysis and documentation. Humans remain accountable for consequential decisions.
 
 AI proposes. Humans decide.
 
+## Foundational Documents
+
+The current conceptual foundation is documented in:
+
+- [Purpose, Values and Philosophy](docs/PURPOSE_VALUES_PHILOSOPHY.md) — why Mission Framework exists and the values that guide it
+- [Principia Missionis](docs/PRINCIPIA_MISSIONIS.md) — the foundational principles
+- [Mission Theory](docs/MISSION_THEORY.md) — missions, dependency descent and the universal operational layer
+- [Reality Model](docs/REALITY_MODEL.md) — the reality gap, observability and the Reality Anchor Principle
+- [Evidence Model](docs/EVIDENCE_MODEL.md) — evidence, provenance, contradiction and reviewability
+- [Computational Trust Engineering](docs/COMPUTATIONAL_TRUST_ENGINEERING.md) — a proposed discipline for justified operational trust
+- [Architecture](docs/ARCHITECTURE.md) — the architectural layers and Mission Kernel
+
+## The Mission Cycle
+
+```text
+Reality
+    ↓
+Need
+    ↓
+Mission
+    ↓
+Architecture
+    ↓
+Capability
+    ↓
+Operation
+    ↓
+Observation
+    ↓
+Evidence
+    ↓
+Knowledge
+    ↓
+Understanding
+    ↓
+Decision
+    ↓
+Improvement
+    ↓
+Reality
+```
+
+Each mission changes reality. That changed reality creates new needs, new learning and new missions.
+
 ## Design Goals
 
-- Trust by Design
-- Evidence and provenance by default
-- Explainability and traceability
-- Human accountability
-- AI-provider independence
-- Cloud-provider independence
-- Modular and reusable architecture
-- Long-term maintainability
+- Begin with genuine need
+- Create meaningful and accessible value
+- Respect reality
+- Earn trust through evidence
+- Preserve provenance and explainability
+- Maintain human accountability
+- Share knowledge responsibly
+- Reduce unnecessary complexity
+- Remain independent of specific AI and cloud providers
+- Design for longevity, reuse and continuous improvement
 
 ## Example Missions
 
@@ -61,16 +121,30 @@ AI proposes. Humans decide.
 - Mission Governance
 - Mission OSINT
 
-Each mission shares the same architectural foundation while remaining independently governed and operated.
+Each mission shares the same foundational principles while remaining independently governed and operated.
+
+## What Mission Framework Is
+
+Mission Framework is not limited to Enterprise Architecture, Information Security or Artificial Intelligence.
+
+Each is an important application area.
+
+Mission Framework seeks to describe something more fundamental:
+
+> **How genuine needs become trusted value through missions grounded in reality.**
 
 ## Current Status
 
-The project is establishing its architectural and documentation foundation. Implementation will follow once the core principles, trust model and architecture are sufficiently mature.
+The project is establishing its purpose, principles, vocabulary and architectural foundation. Implementation will follow once the conceptual foundation is sufficiently coherent and mature.
 
 ## Philosophy
 
-Technology changes.
+We begin with need.
 
-Trust must endure.
+We respect reality.
 
-Everything begins with **Trust by Design**.
+We earn trust.
+
+We create value.
+
+We leave things better.
