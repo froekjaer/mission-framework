@@ -42,6 +42,17 @@ AI may accelerate discovery, analysis and documentation. Humans remain accountab
 
 AI proposes. Humans decide.
 
+## Foundational documents
+
+The current conceptual foundation is documented in:
+
+- [Principia Missionis](docs/PRINCIPIA_MISSIONIS.md) — the foundational principles
+- [Mission Theory](docs/MISSION_THEORY.md) — missions, dependency descent and the universal operational layer
+- [Reality Model](docs/REALITY_MODEL.md) — the reality gap, observability and the Reality Anchor Principle
+- [Evidence Model](docs/EVIDENCE_MODEL.md) — evidence, provenance, contradiction and reviewability
+- [Computational Trust Engineering](docs/COMPUTATIONAL_TRUST_ENGINEERING.md) — a proposed discipline for justified operational trust
+- [Architecture](docs/ARCHITECTURE.md) — the architectural layers and Mission Kernel
+
 ## Design Goals
 
 - Trust by Design
