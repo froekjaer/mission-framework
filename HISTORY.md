@@ -12,9 +12,9 @@ It is institutional memory.
 
 History should be preserved, not rewritten.
 
-Decisions should be recorded with context.
+Decisions should be recorded with context and links to demonstrable artefacts where available.
 
-Milestones should describe what changed and why it mattered.
+Milestones should describe what changed and why it mattered without presenting intentions as completed achievements.
 
 Stewards, contributors and collaborators should be acknowledged.
 
@@ -32,19 +32,15 @@ Mission Framework was defined as a Living Body of Knowledge: something that lear
 
 #### Stewardship introduced
 
-Stewardship was adopted instead of ownership. Knowledge belongs to the community, while responsibility belongs to those willing to care for it.
+Stewardship was adopted instead of exclusive ownership. Knowledge is developed for shared benefit, while responsibility remains with identifiable stewards and accountable authorities.
 
 #### AI collaboration established
 
-Artificial intelligence was recognized as a collaborator that can support research, writing, analysis and learning. Human beings remain accountable for decisions and outcomes.
+Artificial intelligence was recognised as a collaborator that can support research, writing, analysis and learning. AI contributions remain subject to review, provenance and human or organisational accountability.
 
-#### Manifesto published
+#### Manifesto and Constitution proposed
 
-The Manifesto established the values and aspirations that guide Mission Framework.
-
-#### Constitution adopted
-
-The Constitution established the enduring principles and governance foundation of Mission Framework.
+A Manifesto and Constitution were identified as future governance artefacts. They must not be described as published or adopted until the corresponding documents and decisions are present and independently verifiable in the repository.
 
 #### Apache License adopted
 
@@ -52,11 +48,23 @@ The Apache License 2.0 was selected to support open use, contribution and respon
 
 #### Mission Platform created
 
-The Mission Platform was introduced as the practical environment where knowledge, tools and missions can be developed and shared.
+Mission Platform was introduced as the implementation environment for schemas, contracts, validators, tools and reference implementations conforming to Mission Framework semantics.
 
-#### Mission Solar Eclipse accepted
+#### Mission Solar Eclipse accepted as a reference mission
 
-Mission Solar Eclipse became an early mission demonstrating how Mission Framework can organize knowledge and action around a real-world objective.
+Mission Solar Eclipse was accepted as an early reference mission intended to test how Mission Framework can organise evidence, decisions and action around a real-world objective.
+
+At this stage it is an intended validation case, not yet a completed demonstration.
+
+#### Independent review round completed
+
+Independent reviews were received from z.ai, Codex and Claude. The reviews converged on the need for a canonical semantic source, one mapped Mission Loop, procedural Mission Core admission and an executable Solar Eclipse vertical slice.
+
+The findings and initial dispositions are recorded in [`reviews/REVIEW-SYNTHESIS.md`](reviews/REVIEW-SYNTHESIS.md).
+
+#### Semantic stabilisation initiated
+
+A canonical glossary, explicit Mission Core admission procedure and evidence-compliant wording were introduced as the first response to the review round.
 
 ## Future Entries
 
