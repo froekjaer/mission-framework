@@ -106,6 +106,15 @@ AI may accelerate discovery, analysis, reasoning and documentation. AI output is
 
 Humans and accountable organisational roles remain responsible for consequential decisions. Mechanisms may act under explicit, bounded and revocable delegated authority.
 
+## Continuity and independent verification
+
+Complex systems may lose knowledge, behaviour or capability through change even when no participant intentionally removes it. Mission Framework therefore treats continuity and system-level reconciliation as explicit quality concerns.
+
+- **Engineering Continuity** requires critical mission state to survive context loss, tool failure and replacement of participants through governed, reviewable and recoverable artefacts.
+- **Independent Outcome Verification** compares observed inputs and constraints with actual outputs through a sufficiently independent and explainable control, so unexplained differences trigger deeper investigation.
+
+The complete discipline is defined in [Engineering Continuity and Independent Outcome Verification](docs/ENGINEERING_CONTINUITY_AND_INDEPENDENT_VERIFICATION.md).
+
 ## Foundational Documents
 
 The current conceptual foundation is documented in:
@@ -119,6 +128,7 @@ The current conceptual foundation is documented in:
 - [Reality Model](docs/REALITY_MODEL.md) — the reality gap, observability and evidence revision
 - [Evidence Model](docs/EVIDENCE_MODEL.md) — evidence, provenance, contradiction and reviewability
 - [Computational Trust Engineering](docs/COMPUTATIONAL_TRUST_ENGINEERING.md) — a proposed discipline for justified operational trust
+- [Engineering Continuity and Independent Outcome Verification](docs/ENGINEERING_CONTINUITY_AND_INDEPENDENT_VERIFICATION.md) — preservation, recovery, regression detection and independent end-to-end reconciliation
 - [Architecture](docs/ARCHITECTURE.md) — architectural layers and the Mission Kernel
 - [External Review Synthesis](reviews/REVIEW-SYNTHESIS.md) — consolidated findings and dispositions from independent reviews
 
@@ -163,6 +173,9 @@ Other diagrams in the body of knowledge may show architectural, operational, evi
 - Earn justified reliance through evidence and challenge
 - Preserve provenance, contradiction and explainability
 - Maintain identifiable accountability and explicit delegation
+- Preserve mission-critical knowledge and capability across change
+- Detect absence and unexplained behavioural differences as first-class quality conditions
+- Reconcile complex outcomes through sufficiently independent controls
 - Share knowledge responsibly
 - Reduce unnecessary complexity
 - Remain independent of specific AI and cloud providers
@@ -191,6 +204,8 @@ Mission Framework seeks to describe something more fundamental:
 
 The next technical and empirical step is a deliberately small, versioned and testable vertical slice using Mission Solar Eclipse. Broad ontology and platform services will not be frozen before that reference case has challenged the model.
 
+The continuity and independent-verification proposition will be challenged through Mission Solar Eclipse, Publication Pipeline and future Mission Timelapse work rather than accepted solely from architectural argument.
+
 ## Philosophy
 
 We begin with purpose.
@@ -198,6 +213,10 @@ We begin with purpose.
 We respect reality.
 
 We preserve evidence and uncertainty.
+
+We preserve continuity across change.
+
+We reconcile outcomes independently.
 
 We exercise accountable authority.
 
