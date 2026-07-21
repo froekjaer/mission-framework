@@ -8,106 +8,118 @@ Its purpose is simple:
 
 > **Create what is needed, and make it accessible to those who need it.**
 
-Architecture, governance, security and technology are essential, but they are means rather than ends. They exist to help genuine needs become sustainable value.
+Architecture, governance, security and technology are essential, but they are means rather than ends. They exist to help justified needs, opportunities and obligations become sustainable value.
 
 ## Why Mission Framework?
 
 People, organisations and societies continuously face the same fundamental challenge:
 
-> **How do we transform genuine needs into lasting value?**
+> **How do we create beneficial change in reality in response to a justified need, opportunity, obligation or condition?**
 
 Technology changes. Organisations change. Methods change.
 
 The underlying challenge remains.
 
-Mission Framework therefore begins with need, grounds decisions in reality, justifies trust through evidence and uses architecture to enable missions.
+Mission Framework therefore begins with purpose, grounds decisions in observable reality, justifies reliance through evidence and uses architecture to enable governed missions.
+
+## Canonical semantics
+
+The [`GLOSSARY.md`](GLOSSARY.md) is the canonical source for Mission Framework terminology and the Mission Loop.
+
+Normative semantic definitions belong in `mission-framework`. Mission Platform implements them through schemas, contracts, validators and tools. Domain missions extend and test them through scenarios, evidence and acceptance cases.
+
+The procedural rule for admitting concepts to Mission Core is defined in [`docs/MISSION_CORE_ADMISSION.md`](docs/MISSION_CORE_ADMISSION.md).
 
 ## Purpose before Architecture
 
-Mission Framework was not created to define architecture for its own sake.
+Mission Framework was not created to define architecture, governance or technology for their own sake.
 
-It was not created to define governance for its own sake.
-
-It was not created to define technology for its own sake.
-
-It exists to help people create what is genuinely needed and make that value available to those who need it—responsibly, transparently and sustainably.
+It exists to help people create beneficial, accessible change in reality—responsibly, transparently and sustainably.
 
 ## Trust by Design
 
-Trust remains a foundational architectural principle:
+Trust is a purpose-relative judgement that reliance is justified under stated conditions and consequences.
 
-> Every component, workflow, AI interaction and architectural decision should be evaluated by one question: **Does it increase or decrease justified trust?**
+Every material component, workflow, AI interaction and architectural decision should therefore be evaluated across the relevant trust dimensions, stakeholders and mission policy:
 
-Trust is not assumed. It is earned through evidence, competence, transparency, consistency and human accountability.
+> **Does this design create sufficiently justified reliance for its stated purpose and consequence?**
+
+Trust is not assumed. It is supported through evidence, competence, transparency, consistency, challenge and accountable authority.
+
+Verification history and fitness-for-purpose are separate judgements. Something may be well verified yet unfit for a particular decision, or relied upon provisionally under explicit uncertainty and time pressure.
 
 ## Reality before Models
 
-Reality is the final authority.
+Reality is the final authority, but missions encounter reality only through fallible observation and evidence.
 
-Models, architectures and conclusions must remain connected to observable reality through evidence and provenance. When reality contradicts the model, the model must change.
+Operationally, this means that when credible evidence contradicts a model, the model must change or the contradiction must be explicitly recorded and held open. Evidence must not be dismissed merely to protect an existing conclusion.
+
+Models, architectures, claims and decisions must remain traceable to observations, evidence, provenance, time and uncertainty.
 
 ## Knowledge before Intelligence
 
-Data alone has limited value. Information provides context. Knowledge supports understanding. Intelligence supports decisions.
+Data alone has limited value. Observations become evidence when placed in context with provenance and integrity. Evidence supports or challenges claims. Knowledge emerges when evidence, claims, context, time and uncertainty survive an appropriate challenge process.
 
-Mission Framework supports that complete journey without transferring accountability away from people.
+AI may accelerate discovery, analysis, reasoning and documentation. AI output is evidence or a proposal, not authority by declaration.
 
-AI may accelerate discovery, analysis and documentation. Humans remain accountable for consequential decisions.
-
-AI proposes. Humans decide.
+Humans and accountable organisational roles remain responsible for consequential decisions. Mechanisms may act under explicit, bounded and revocable delegated authority.
 
 ## Foundational Documents
 
 The current conceptual foundation is documented in:
 
+- [Canonical Glossary and Mission Loop](GLOSSARY.md) — normative definitions and the common semantic model
+- [Mission Core Admission](docs/MISSION_CORE_ADMISSION.md) — the evidence-based procedure for changing Mission Core
 - [Purpose, Values and Philosophy](docs/PURPOSE_VALUES_PHILOSOPHY.md) — why Mission Framework exists and the values that guide it
-- [Principia Missionis](docs/PRINCIPIA_MISSIONIS.md) — the foundational principles
-- [Mission Theory](docs/MISSION_THEORY.md) — missions, dependency descent and the universal operational layer
-- [Reality Model](docs/REALITY_MODEL.md) — the reality gap, observability and the Reality Anchor Principle
+- [Principia Missionis](docs/PRINCIPIA_MISSIONIS.md) — foundational principles
+- [Mission Theory](docs/MISSION_THEORY.md) — missions, dependency descent and the operational layer
+- [Reality Model](docs/REALITY_MODEL.md) — the reality gap, observability and evidence revision
 - [Evidence Model](docs/EVIDENCE_MODEL.md) — evidence, provenance, contradiction and reviewability
 - [Computational Trust Engineering](docs/COMPUTATIONAL_TRUST_ENGINEERING.md) — a proposed discipline for justified operational trust
-- [Architecture](docs/ARCHITECTURE.md) — the architectural layers and Mission Kernel
+- [Architecture](docs/ARCHITECTURE.md) — architectural layers and the Mission Kernel
+- [External Review Synthesis](reviews/REVIEW-SYNTHESIS.md) — consolidated findings and dispositions from independent reviews
 
-## The Mission Cycle
+## The Canonical Mission Loop
 
 ```text
 Reality
-    ↓
-Need
-    ↓
+  ↓
+Need / Opportunity / Obligation / Condition
+  ↓
 Mission
-    ↓
-Architecture
-    ↓
-Capability
-    ↓
-Operation
-    ↓
+  ↓
+Objective
+  ↓
+Capability and Action
+  ↓
 Observation
-    ↓
+  ↓
 Evidence
-    ↓
-Knowledge
-    ↓
-Understanding
-    ↓
+  ↓
+Claim and Knowledge
+  ↓
 Decision
-    ↓
-Improvement
-    ↓
+  ↓
+Action
+  ↓
+Outcome
+  ↓
+Learning
+  ↓
 Reality
 ```
 
-Each mission changes reality. That changed reality creates new needs, new learning and new missions.
+Other diagrams in the body of knowledge may show architectural, operational, evidence or intelligence views of this loop. They must state what they expand, omit or aggregate and must not redefine the underlying concepts.
 
 ## Design Goals
 
-- Begin with genuine need
-- Create meaningful and accessible value
-- Respect reality
-- Earn trust through evidence
-- Preserve provenance and explainability
-- Maintain human accountability
+- Begin with a justified need, opportunity, obligation or condition
+- Define accountable purpose and assessable objectives
+- Create beneficial and accessible value
+- Respect the reality gap
+- Earn justified reliance through evidence and challenge
+- Preserve provenance, contradiction and explainability
+- Maintain identifiable accountability and explicit delegation
 - Share knowledge responsibly
 - Reduce unnecessary complexity
 - Remain independent of specific AI and cloud providers
@@ -115,36 +127,38 @@ Each mission changes reality. That changed reality creates new needs, new learni
 
 ## Example Missions
 
-- Mission Eclipse
+- Mission Solar Eclipse
 - Mission Maritime
 - Mission Timelapse
 - Mission Governance
 - Mission OSINT
 
-Each mission shares the same foundational principles while remaining independently governed and operated.
+Each mission shares the canonical foundation while remaining independently governed and operated.
 
 ## What Mission Framework Is
 
-Mission Framework is not limited to Enterprise Architecture, Information Security or Artificial Intelligence.
-
-Each is an important application area.
+Mission Framework is not limited to Enterprise Architecture, Information Security or Artificial Intelligence. Each is an important application area.
 
 Mission Framework seeks to describe something more fundamental:
 
-> **How genuine needs become trusted value through missions grounded in reality.**
+> **How governed missions create justified, evidence-grounded change in reality.**
 
 ## Current Status
 
-The project is establishing its purpose, principles, vocabulary and architectural foundation. Implementation will follow once the conceptual foundation is sufficiently coherent and mature.
+The project is stabilising its vocabulary and architectural foundation following independent conceptual and technical review.
+
+The next technical step is a deliberately small, versioned and testable vertical slice using Mission Solar Eclipse. Broad ontology and platform services will not be frozen before that reference case has challenged the model.
 
 ## Philosophy
 
-We begin with need.
+We begin with purpose.
 
 We respect reality.
 
-We earn trust.
+We preserve evidence and uncertainty.
 
-We create value.
+We exercise accountable authority.
+
+We learn from outcomes.
 
 We leave things better.
