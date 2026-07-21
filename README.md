@@ -10,6 +10,16 @@ Its purpose is simple:
 
 Architecture, governance, security and technology are essential, but they are means rather than ends. They exist to help justified needs, opportunities and obligations become sustainable value.
 
+## v0.2 Review Candidate
+
+Mission Framework v0.2 is being prepared for independent review.
+
+The project does not ask reviewers to endorse the framework. It asks them to examine whether its concepts, methods and questions are useful, where they overlap existing knowledge, what evidence is missing, and which ideas should be revised or rejected.
+
+Start with the [review package](review/README.md), including the [invitation](review/INVITATION.md), [review guide](review/REVIEW_GUIDE.md), [known limitations](review/KNOWN_LIMITATIONS.md) and [known open questions](review/KNOWN_OPEN_QUESTIONS.md).
+
+Participation should not be interpreted as endorsement of Mission Framework, its contributors or its conclusions.
+
 ## Why Mission Framework?
 
 People, organisations and societies continuously face the same fundamental challenge:
@@ -145,7 +155,7 @@ Mission Framework seeks to describe something more fundamental:
 
 ## Current Status
 
-The project is stabilising its vocabulary and architectural foundation following independent conceptual and technical review.
+The project is stabilising its vocabulary and architectural foundation through conceptual, technical and independent external review.
 
 The next technical step is a deliberately small, versioned and testable vertical slice using Mission Solar Eclipse. Broad ontology and platform services will not be frozen before that reference case has challenged the model.
 
