@@ -2,7 +2,9 @@
 
 > **From Need to Value**
 
-Mission Framework is an open architectural foundation for understanding, designing and improving missions that create meaningful, trustworthy value.
+**Foundation Release v1.0**
+
+Mission Framework is the semantic core of the [Collaborative Intelligence](https://github.com/froekjaer/collaborative-intelligence) research programme. It provides an open architectural foundation for understanding, designing and improving governed missions that seek to create meaningful, trustworthy value.
 
 Its purpose is simple:
 
@@ -10,13 +12,23 @@ Its purpose is simple:
 
 Architecture, governance, security and technology are essential, but they are means rather than ends. They exist to help justified needs, opportunities and obligations become sustainable value.
 
-## v0.2 Review Candidate
+## Role in the research programme
 
-Mission Framework v0.2 is being prepared for independent review.
+Mission Framework owns the programme's normative semantics: canonical terms, foundational principles, the Mission Loop, evidence and trust concepts, governance semantics and the rules by which the semantic core may change.
 
-The project does not ask reviewers to endorse the framework. It asks them to examine whether its concepts, methods and questions are useful, where they overlap existing knowledge, what evidence is missing, and which ideas should be revised or rejected.
+The framework is intentionally separated from its implementations:
 
-Start with the [review package](review/README.md), including the [invitation](review/INVITATION.md), [review guide](review/REVIEW_GUIDE.md), [known limitations](review/KNOWN_LIMITATIONS.md) and [known open questions](review/KNOWN_OPEN_QUESTIONS.md).
+- [Collaborative Intelligence](https://github.com/froekjaer/collaborative-intelligence) provides the programme-level research vision and architecture.
+- [Mission Solar Eclipse](https://github.com/froekjaer/mission-solar-eclipse) is the first reference implementation and empirical challenge to the framework.
+- [Publication Pipeline](https://github.com/froekjaer/-Publication-Pipeline) transforms reviewed Markdown sources into reproducible publication formats.
+
+Implementations may extend, test or challenge the framework, but they should not silently redefine canonical meaning.
+
+## Foundation and review status
+
+Foundation v1.0 establishes a coherent semantic baseline for reference implementation and publication. It does not claim theoretical completeness or empirical validation.
+
+The existing v0.2 review material remains part of the project history and review record. Independent review continues through the [review package](review/README.md), including the [invitation](review/INVITATION.md), [review guide](review/REVIEW_GUIDE.md), [known limitations](review/KNOWN_LIMITATIONS.md) and [known open questions](review/KNOWN_OPEN_QUESTIONS.md).
 
 Participation should not be interpreted as endorsement of Mission Framework, its contributors or its conclusions.
 
@@ -36,9 +48,29 @@ Mission Framework therefore begins with purpose, grounds decisions in observable
 
 The [`GLOSSARY.md`](GLOSSARY.md) is the canonical source for Mission Framework terminology and the Mission Loop.
 
-Normative semantic definitions belong in `mission-framework`. Mission Platform implements them through schemas, contracts, validators and tools. Domain missions extend and test them through scenarios, evidence and acceptance cases.
+Normative semantic definitions belong in `mission-framework`. Reference implementations exercise those definitions through scenarios, evidence and acceptance cases. Publication artefacts communicate them but do not become canonical merely by being published.
 
 The procedural rule for admitting concepts to Mission Core is defined in [`docs/MISSION_CORE_ADMISSION.md`](docs/MISSION_CORE_ADMISSION.md).
+
+## Framework Findings
+
+Observations from reference missions, reviews and implementations may reveal ambiguity, contradiction, incompleteness or unnecessary complexity in the semantic core. Such observations are returned through the [`Framework Findings process`](docs/FRAMEWORK_FINDINGS.md).
+
+The process distinguishes direct observation from interpretation, requires traceable evidence and provides explicit dispositions such as clarify, revise, extend, reject, defer or return to implementation scope.
+
+```text
+Reference observation
+        ↓
+Framework Finding
+        ↓
+Semantic and evidence review
+        ↓
+Canonical disposition
+        ↓
+Propagation to implementations and publications
+```
+
+A local implementation issue does not automatically become a framework change, and a framework ambiguity should not be concealed through an undocumented local interpretation.
 
 ## Purpose before Architecture
 
@@ -80,6 +112,7 @@ The current conceptual foundation is documented in:
 
 - [Canonical Glossary and Mission Loop](GLOSSARY.md) — normative definitions and the common semantic model
 - [Mission Core Admission](docs/MISSION_CORE_ADMISSION.md) — the evidence-based procedure for changing Mission Core
+- [Framework Findings Process](docs/FRAMEWORK_FINDINGS.md) — controlled feedback from implementation and review to canonical semantics
 - [Purpose, Values and Philosophy](docs/PURPOSE_VALUES_PHILOSOPHY.md) — why Mission Framework exists and the values that guide it
 - [Principia Missionis](docs/PRINCIPIA_MISSIONIS.md) — foundational principles
 - [Mission Theory](docs/MISSION_THEORY.md) — missions, dependency descent and the operational layer
@@ -135,15 +168,16 @@ Other diagrams in the body of knowledge may show architectural, operational, evi
 - Remain independent of specific AI and cloud providers
 - Design for longevity, reuse and continuous improvement
 
-## Example Missions
+## Reference missions
 
-- Mission Solar Eclipse
+[Mission Solar Eclipse](https://github.com/froekjaer/mission-solar-eclipse) is the first reference implementation. Additional candidate missions include:
+
 - Mission Maritime
 - Mission Timelapse
 - Mission Governance
 - Mission OSINT
 
-Each mission shares the canonical foundation while remaining independently governed and operated.
+Each mission shares the canonical foundation while remaining independently governed and operated. Findings with semantic consequences are returned to Mission Framework through the Framework Findings process.
 
 ## What Mission Framework Is
 
@@ -153,11 +187,9 @@ Mission Framework seeks to describe something more fundamental:
 
 > **How governed missions create justified, evidence-grounded change in reality.**
 
-## Current Status
+## Current direction
 
-The project is stabilising its vocabulary and architectural foundation through conceptual, technical and independent external review.
-
-The next technical step is a deliberately small, versioned and testable vertical slice using Mission Solar Eclipse. Broad ontology and platform services will not be frozen before that reference case has challenged the model.
+The next technical and empirical step is a deliberately small, versioned and testable vertical slice using Mission Solar Eclipse. Broad ontology and platform services will not be frozen before that reference case has challenged the model.
 
 ## Philosophy
 
