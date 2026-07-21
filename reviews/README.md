@@ -7,7 +7,8 @@ This directory is the shared entry point for independent reviews of Mission Fram
 ### AI reviewers
 
 - [Invitation to z.ai](z-ai/INVITATION.md)
-- [z.ai response template](z-ai/RESPONSE-TEMPLATE.md)
+- [z.ai — Architectural Review (v0.2)](z-ai/RESPONSE-TEMPLATE.md)
+- [z.ai — Independent Examination (Foundation v1.0)](z-ai/INDEPENDENT-EXAMINATION-v1.md)
 - [Invitation to Codex](codex/INVITATION.md)
 - [Codex response template](codex/RESPONSE-TEMPLATE.md)
 - [Invitation to Claude](claude/INVITATION.md)
