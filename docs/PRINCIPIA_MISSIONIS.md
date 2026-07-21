@@ -215,6 +215,26 @@ Reported progress is itself a claim and therefore requires evidence.
 
 This principle applies equally to architecture, governance, software, research and documentation.
 
+## Principle 16 — Continuity Must Be Engineered
+
+No human, AI, connector, conversation or runtime session shall be the sole carrier of mission-critical knowledge or state.
+
+Critical knowledge, decisions, evidence, artefacts, behaviour and recovery instructions must be preserved in governed and reviewable sources.
+
+A mission should remain reconstructable by a competent replacement participant without relying on prior conversational memory.
+
+Change must therefore be tested not only for what it adds, but also for what it removes, obscures or makes unrecoverable.
+
+## Principle 17 — Outcomes Must Be Independently Reconciled
+
+Complexity does not remove the obligation to verify outcomes.
+
+Where exhaustive internal testing is impractical, observed inputs and constraints shall be compared with actual outputs through a sufficiently independent and explainable model, algorithm or control.
+
+Any material difference outside an approved tolerance remains unresolved until investigated and dispositioned.
+
+Detection is not diagnosis, but unexplained difference is evidence that deeper analysis is required.
+
 ## The Closing Axiom
 
 Mission Framework does not attempt to build systems that know everything.
