@@ -16,6 +16,7 @@ sources:
   - docs/FRAMEWORK_FINDINGS.md
   - docs/operational/TRUST-BOOTSTRAP-CREDIBILITY-ONBOARDING-EVIDENCE-MATURITY.md
   - docs/publication/PUBLICATION-PIPELINE.md
+  - docs/publication/AUDIENCE-ADAPTIVE-KNOWLEDGE-DELIVERY.md
   - HISTORY.md
 appendices:
   - reviews/REVIEW-SYNTHESIS.md
