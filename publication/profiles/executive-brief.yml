@@ -1,0 +1,11 @@
+id: executive-brief
+status: draft
+purpose: rapid orientation without overstating evidence
+audience: [executive, board, policymaker, journalist]
+source_policy:
+  canonical_only: true
+content_rules:
+  preserve_limitations: true
+  link_to_canonical_sources: true
+  target_length_pages: 4
+outputs: [html, pdf]
