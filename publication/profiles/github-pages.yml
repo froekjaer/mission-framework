@@ -1,0 +1,8 @@
+id: github-pages
+status: draft
+purpose: navigable web publication linked to canonical repository content
+audience: [public, practitioner, reviewer]
+content_rules:
+  preserve_canonical_links: true
+  identify_generated_summaries: true
+outputs: [site]
