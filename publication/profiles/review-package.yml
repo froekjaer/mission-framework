@@ -1,0 +1,12 @@
+id: review-package
+status: draft
+purpose: bounded source-linked package for independent review or assurance
+audience: [independent_reviewer, subject_matter_expert]
+source_policy:
+  canonical_only: true
+content_rules:
+  require_repository_map: true
+  require_known_limitations: true
+  require_review_questions: true
+  disclose_omissions: true
+outputs: [html, pdf, archive]
