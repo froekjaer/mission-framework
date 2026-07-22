@@ -1,0 +1,10 @@
+id: presentation
+status: draft
+purpose: audience-specific interpretation of reviewed source material
+audience: [defined_per_presentation]
+content_rules:
+  disclose_material_omissions: true
+  identify_simplifications: true
+  identify_new_diagrams: true
+  preserve_source_links: true
+outputs: [pptx, pdf]
