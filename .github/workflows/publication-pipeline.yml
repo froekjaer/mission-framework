@@ -16,24 +16,35 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: publication-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  validate:
-    name: Validate publication sources and profiles
+  build:
+    name: Build publication suite
     runs-on: ubuntu-latest
     steps:
       - name: Check out source revision
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Install validator dependency
-        run: python -m pip install --disable-pip-version-check pyyaml
+      - name: Install renderers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends pandoc
+          python -m pip install --disable-pip-version-check pyyaml weasyprint
 
-      - name: Validate required files and YAML profiles
+      - name: Validate publication profiles
         shell: python
         run: |
           from pathlib import Path
@@ -43,6 +54,10 @@ jobs:
           required = [
               Path('docs/publication/PUBLICATION-PIPELINE.md'),
               Path('publication/README.md'),
+              Path('publication/book.yml'),
+              Path('publication/executive-brief.md'),
+              Path('publication/presentation.md'),
+              Path('publication/build.py'),
           ]
           missing = [str(path) for path in required if not path.is_file()]
           if missing:
@@ -51,10 +66,6 @@ jobs:
               sys.exit(1)
 
           profiles = sorted(Path('publication/profiles').glob('*.yml'))
-          if not profiles:
-              print('No publication profiles found.')
-              sys.exit(1)
-
           errors = []
           required_keys = {'id', 'status', 'purpose', 'outputs'}
           for profile in profiles:
@@ -63,66 +74,50 @@ jobs:
               except Exception as exc:
                   errors.append(f'{profile}: invalid YAML: {exc}')
                   continue
-
               if not isinstance(data, dict):
                   errors.append(f'{profile}: profile root must be a mapping')
                   continue
-
               absent = sorted(required_keys - set(data))
               if absent:
                   errors.append(f"{profile}: missing keys: {', '.join(absent)}")
-
               if data.get('id') != profile.stem:
-                  errors.append(
-                      f"{profile}: id '{data.get('id')}' must match filename '{profile.stem}'"
-                  )
-
-              outputs = data.get('outputs')
-              if not isinstance(outputs, list) or not outputs:
+                  errors.append(f"{profile}: id must match filename")
+              if not isinstance(data.get('outputs'), list) or not data['outputs']:
                   errors.append(f'{profile}: outputs must be a non-empty list')
-
           if errors:
-              print('Publication profile validation failed:')
               print('\n'.join(f'- {error}' for error in errors))
               sys.exit(1)
-
           print(f'Validated {len(profiles)} publication profiles.')
 
-  build-preview-manifest:
-    name: Build traceability preview
-    needs: validate
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out source revision
-        uses: actions/checkout@v4
+      - name: Render all publications
+        run: python publication/build.py
 
-      - name: Create publication manifest
-        run: |
-          mkdir -p build/publication
-          python - <<'PY'
-          import json
-          import os
-          from pathlib import Path
+      - name: Show generated files
+        run: find dist -type f -printf '%p\n' | sort
 
-          manifest = {
-              'pipeline_status': 'scaffold',
-              'source_commit': os.environ['GITHUB_SHA'],
-              'repository': os.environ['GITHUB_REPOSITORY'],
-              'workflow_run': os.environ['GITHUB_RUN_ID'],
-              'note': (
-                  'Rendering generators are not yet implemented; this manifest '
-                  'demonstrates profile discovery and provenance capture.'
-              ),
-              'profiles': sorted(path.stem for path in Path('publication/profiles').glob('*.yml')),
-          }
-          Path('build/publication/manifest.json').write_text(
-              json.dumps(manifest, indent=2) + '\n', encoding='utf-8'
-          )
-          PY
-
-      - name: Upload traceability preview
+      - name: Upload complete publication suite
         uses: actions/upload-artifact@v4
         with:
-          name: publication-pipeline-preview
-          path: build/publication/manifest.json
+          name: mission-framework-publications-${{ github.sha }}
+          path: dist/
           if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload GitHub Pages artefact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/site
+
+  deploy-pages:
+    name: Publish GitHub Pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy generated site
+        id: deployment
+        uses: actions/deploy-pages@v4
