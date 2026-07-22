@@ -1,0 +1,10 @@
+id: book
+status: draft
+purpose: sustained argument or body of knowledge
+audience: [practitioner, researcher, advanced_reader]
+source_policy:
+  canonical_only: true
+  require_reviewed_sources: true
+required_metadata: [source_commit, generator_version, profile_revision, review_status, license]
+outputs: [html, pdf]
+future_outputs: [epub, docx]
