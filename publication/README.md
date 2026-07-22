@@ -1,50 +1,54 @@
-# Publication Pipeline
+# Mission Framework Publication Hub
 
-This directory contains the executable publication configuration for Mission Framework.
+This directory contains the configuration and generator for the governed Mission Framework publication suite.
+
+The public user experience is the generated **Publication Hub** on GitHub Pages. Readers and reviewers should not need to navigate repository folders to find the current book, executive brief, presentation or review package.
+
+## What the pipeline publishes
+
+- **Book:** online HTML, PDF, EPUB, DOCX and Markdown;
+- **Executive Brief:** online HTML, PDF, DOCX and Markdown;
+- **Presentation:** online presentation, PPTX, PDF and Markdown;
+- **Review Package:** a single downloadable ZIP;
+- **Machine resources:** publication catalog, provenance manifest and SHA-256 checksums.
+
+## Author workflow
+
+1. Edit canonical Markdown in the repository.
+2. Add or reorder book sources in `publication/book.yml` when necessary.
+3. Edit `publication/executive-brief.md` for the short decision-maker entry point.
+4. Edit `publication/presentation.md` for the project presentation.
+5. Commit or merge to `main`.
+6. GitHub Actions builds and publishes the complete suite.
+
+Generated files are never editing sources.
+
+## Audience-Adaptive Knowledge Delivery
+
+The hub implements the model in [`docs/publication/AUDIENCE-ADAPTIVE-KNOWLEDGE-DELIVERY.md`](../docs/publication/AUDIENCE-ADAPTIVE-KNOWLEDGE-DELIVERY.md).
+
+Human visitors receive a clear project introduction, purpose-based choices, direct download buttons, responsive layout and progressive disclosure of technical details. Machine consumers receive a stable JSON catalog, provenance manifest and checksums.
+
+## Configuration
+
+- `book.yml` declares the ordered canonical source set for the book.
+- `executive-brief.md` is publication-specific orientation content.
+- `presentation.md` is publication-specific slide content.
+- `profiles/*.yml` declares publication intent, audience and expected output types.
+- `build.py` performs the traceable transformations.
 
 The normative publication model is defined in [`docs/publication/PUBLICATION-PIPELINE.md`](../docs/publication/PUBLICATION-PIPELINE.md).
 
-## What the build produces
-
-`publication/build.py` renders one source revision into:
-
-- a book in Markdown, HTML, PDF, DOCX and EPUB;
-- an executive brief in Markdown, HTML, PDF and DOCX;
-- an introductory presentation in PPTX and reveal.js HTML;
-- a navigable static website suitable for GitHub Pages;
-- a review package in directory and ZIP form;
-- a provenance manifest and SHA-256 checksum list.
-
-Generated files are written to `dist/`. They are derived publications and do not replace the repository Markdown as canonical source.
-
-## Canonical book assembly
-
-`book.yml` defines the ordered source set. A declared source that is absent is reported in the manifest and as a build warning. The build fails when no declared canonical source is available.
-
-## Automated build
-
-`.github/workflows/publication-pipeline.yml` validates the profiles, installs Pandoc and WeasyPrint, runs the renderer, uploads the complete distribution as a GitHub Actions artifact and publishes `dist/site` through GitHub Pages on pushes to `main`.
-
-GitHub Pages must be configured in the repository settings to use **GitHub Actions** as its source. Until that repository-level setting is enabled, the publication artifact can still build successfully while the deployment job may be rejected by GitHub.
-
 ## Local build
 
-On a system with Python 3.12+, Pandoc and WeasyPrint:
+The supported build environment requires Python 3.12, PyYAML, Pandoc and WeasyPrint.
 
 ```bash
-python -m pip install pyyaml weasyprint
 python publication/build.py
 ```
 
-## Profiles
+Outputs are created in `dist/`. The website entry point is `dist/site/index.html`.
 
-The profile files under `profiles/` declare the intended audience, source policy and outputs for:
+## GitHub Pages
 
-- book;
-- article;
-- executive brief;
-- review package;
-- presentation;
-- GitHub Pages.
-
-The executable renderer currently implements the shared publication suite. Profile-specific selection and templating can evolve without changing the canonical-source principle.
+The repository should use **Settings → Pages → Build and deployment → Source: GitHub Actions**. The workflow publishes `dist/site` after successful builds on `main`.
