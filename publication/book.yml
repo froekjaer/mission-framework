@@ -1,0 +1,21 @@
+title: Mission Framework
+subtitle: A semantic and evidence-oriented framework for missions
+language: en
+status: pre-review
+sources:
+  - README.md
+  - PRINCIPIA_MISSIONIS.md
+  - MISSION_THEORY.md
+  - REALITY_MODEL.md
+  - EVIDENCE_MODEL.md
+  - COMPUTATIONAL_TRUST_ENGINEERING.md
+  - ARCHITECTURE.md
+  - GLOSSARY.md
+  - docs/MISSION_CORE_ADMISSION.md
+  - docs/V0.2_SEMANTIC_FOUNDATION.md
+  - docs/FRAMEWORK_FINDINGS.md
+  - docs/operational/TRUST-BOOTSTRAP-CREDIBILITY-ONBOARDING-EVIDENCE-MATURITY.md
+  - docs/publication/PUBLICATION-PIPELINE.md
+  - HISTORY.md
+appendices:
+  - reviews/REVIEW-SYNTHESIS.md
