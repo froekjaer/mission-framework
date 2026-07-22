@@ -1,0 +1,11 @@
+id: article
+status: draft
+purpose: bounded proposition for a defined audience and publication context
+audience: [defined_per_article]
+source_policy:
+  canonical_only: true
+  require_source_revision: true
+content_rules:
+  distinguish_synthesis_from_new_claims: true
+required_metadata: [source_commit, canonical_sources, generator_version, review_status]
+outputs: [html, pdf]
