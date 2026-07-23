@@ -6,7 +6,7 @@ The Review Kit defines a consistent, traceable process for reviewing Mission Fra
 
 It is designed for both human reviewers and AI-assisted review.
 
-## Review Objectives
+## Review objectives
 
 A review SHALL determine whether a component is:
 
@@ -17,86 +17,120 @@ A review SHALL determine whether a component is:
 - traceable to decisions, sources, and changes;
 - safe to reuse in later standards, research, or implementations.
 
-## Review Scope
+## Review scope
 
 Reviews MAY cover:
 
 - standards and normative requirements;
 - research notes and evidence summaries;
-- implementation guides and build artifacts;
-- templates, checklists, and operational procedures;
-- release candidates.
+- architecture and implementation guidance;
+- templates, examples, and operating procedures;
+- governance and decision records;
+- release candidates and repository changes.
 
-## Review Levels
+The review scope SHALL identify what was reviewed, what was excluded, and the exact version or commit assessed.
 
-### Level 1 — Author Check
+## Review levels
 
-The author verifies completeness, structure, references, and obvious contradictions.
+### Level 1 — Editorial review
 
-### Level 2 — Independent Review
+Used for low-risk wording, formatting, references, and structural clarity. It verifies that meaning has not unintentionally changed.
 
-A reviewer who did not author the component evaluates quality, assumptions, evidence, risks, and usability.
+### Level 2 — Technical review
 
-### Level 3 — Release Review
+Used for substantive content. It assesses correctness, consistency, evidence, feasibility, dependencies, and risk.
 
-The maintainer verifies that required review findings are resolved or explicitly accepted before release.
+### Level 3 — Independent assurance review
 
-## Required Review Outputs
+Used for high-impact, safety-sensitive, security-sensitive, legally significant, or release-critical components. The reviewer should be independent of the author and suitably competent for the subject.
 
-Every formal review SHALL record:
+The selected level SHALL be proportionate to impact, uncertainty, novelty, and reversibility.
 
-- component name and version or commit;
-- reviewer identity or reviewer-agent designation;
-- review date;
-- scope and exclusions;
-- findings;
-- severity or priority;
+## Required review assets
+
+The Review Kit consists of:
+
+- `reviewer-mission.md` — reviewer responsibilities and conduct;
+- `review-template.md` — standard review record;
+- `severity-classification.md` — consistent finding severity;
+- `evidence-standard.md` — evidence quality and traceability requirements when added.
+
+## Review process
+
+1. Identify the component, owner, version, and review level.
+2. Define scope, exclusions, criteria, and dependencies.
+3. Collect and validate relevant evidence.
+4. Assess the component independently.
+5. Record findings using the standard template.
+6. Classify findings using the severity standard.
+7. Allow the owner to respond and remediate.
+8. Verify material remediation.
+9. Record the final decision and residual risk.
+10. Preserve the review record with the reviewed version.
+
+## Finding requirements
+
+Each finding SHALL include:
+
+- a unique identifier;
+- a concise title;
+- severity;
+- affected location or component;
+- observed condition;
+- expected condition or criterion;
+- impact and rationale;
+- supporting evidence;
 - recommended action;
-- disposition: accepted, rejected, deferred, or resolved;
-- final review status.
+- status and owner where applicable.
 
-## Review Status
+## Review statuses
 
-A component SHALL use one of these review states:
+- **Draft** — review is being prepared.
+- **In review** — assessment is active.
+- **Awaiting response** — findings require owner input.
+- **Remediation in progress** — corrective work is underway.
+- **Ready for decision** — review work is complete.
+- **Approved** — component is accepted for its stated purpose.
+- **Approved with conditions** — acceptance depends on recorded conditions.
+- **Changes required** — blocking findings remain.
+- **Rejected** — component is unsuitable for the stated purpose.
+- **Superseded** — a later review replaces this record.
 
-- `DRAFT`
-- `IN REVIEW`
-- `CHANGES REQUIRED`
-- `APPROVED`
-- `REJECTED`
-- `SUPERSEDED`
+## Decision rules
 
-## Review Principles
+- Critical findings block approval.
+- Major findings normally block approval.
+- A Major finding may be accepted only by an authorized decision-maker with documented rationale, residual risk, and conditions.
+- Minor findings may be deferred with an owner and target disposition.
+- Observations do not block approval but should be considered.
 
-Reviewers SHALL:
+## AI-assisted review
 
-1. distinguish facts from assumptions and recommendations;
-2. identify missing evidence and unsupported certainty;
-3. test whether requirements are understandable and verifiable;
-4. report conflicts with existing Mission Framework components;
-5. avoid silently rewriting the author's intent;
-6. make review findings specific and actionable;
-7. preserve traceability between the finding and its resolution.
+AI MAY assist with consistency checks, source comparison, gap analysis, drafting findings, and test generation.
 
-## Human and AI Review
+A human SHALL remain accountable for:
 
-AI-assisted review MAY be used to improve coverage, consistency, and speed.
+- review scope;
+- factual verification;
+- evidence quality;
+- severity and decision;
+- confidentiality and data protection;
+- final approval.
 
-AI output SHALL NOT be treated as independent evidence merely because it was generated by an AI system.
+AI output SHALL be treated as unverified until checked against the component and authoritative evidence.
 
-Material normative changes SHALL remain subject to accountable human approval unless governance explicitly defines another approval model.
+## Traceability
 
-## Review Kit Components
+A completed review SHALL identify:
 
-This directory will contain reusable review instruments, including:
+- the exact reviewed version or commit;
+- reviewer and date;
+- criteria and evidence;
+- findings and dispositions;
+- remediation references;
+- final decision and decision-maker;
+- residual risks and conditions.
 
-- reviewer mission and role definition;
-- review checklist;
-- finding template;
-- evidence-quality checklist;
-- release-readiness checklist;
-- AI review prompt and output format.
+## Completion criteria
 
-## Guiding Rule
-
-Review exists to improve completed work, not to replace building.
+A review is complete when the scope has been assessed, findings are recorded, blocking issues are resolved or formally accepted, the decision is documented, and the record is stored with sufficient traceability for another competent reviewer to reproduce the conclusion.
