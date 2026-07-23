@@ -12,83 +12,89 @@ Mission Framework is developed as an open, traceable engineering project. Contri
 - One logical change per commit.
 - Challenge ideas, not people.
 - Normative requirements must be justified and traceable.
+- Human accountability must be preserved when AI is used.
 
 ## Contribution tracks
 
 Contributions belong in one of three tracks:
 
 - **Standards Track** — normative requirements and approved framework content.
-- **Research Track** — ideas, hypotheses, unresolved questions, and candidate concepts.
-- **Implementation Track** — templates, examples, tools, guidance, and automation.
+- **Research Track** — hypotheses, source analysis, alternatives, and material not yet accepted as normative.
+- **Build Track** — repository structure, templates, tooling, automation, examples, and release assets.
 
-New ideas must not be inserted directly into normative standards. They enter through the Research Track and move into the Standards Track only after review and acceptance.
+State the intended track in the issue, pull request, or commit description.
 
-## Workflow
+## Before contributing
 
-1. Identify the problem or proposed improvement.
-2. Create or reference an issue when the change is substantial.
-3. Place the contribution in the correct track.
-4. Make the smallest complete change that solves the problem.
-5. Submit the change for review.
-6. Resolve findings and preserve the decision rationale.
-7. Merge only after approval.
+1. Confirm that the proposed change supports the project purpose and roadmap.
+2. Search existing files, issues, and pull requests for related work.
+3. Identify whether the change is normative, exploratory, or operational.
+4. Collect evidence appropriate to the claims being made.
+5. Keep the change as small as reasonably possible.
 
-## Standards for contributions
+## Content requirements
 
-- Use Markdown for project documents unless another format is explicitly required.
-- Use English for normative standards and shared project infrastructure.
-- Use clear requirement language consistently.
-- Keep terminology aligned with the project glossary and existing standards.
-- Support factual or scientific claims with credible sources.
-- Record significant changes in `CHANGELOG.md`.
-- Preserve traceability between requirements, evidence, findings, and decisions.
+A contribution should:
 
-## Normative language
+- define its purpose and scope;
+- identify assumptions, dependencies, and limitations;
+- use terms consistently;
+- distinguish requirements from guidance and examples;
+- cite sources where claims require external support;
+- explain material risks and trade-offs;
+- remain understandable without undocumented background knowledge.
 
-Normative documents should use the following terms consistently:
+Normative language uses:
 
-- **shall** — mandatory requirement
-- **should** — recommended practice
-- **may** — permitted option
+- **SHALL** for mandatory requirements;
+- **SHOULD** for recommended practice where exceptions may be justified;
+- **MAY** for permitted options.
 
-Avoid ambiguous terms such as “normally”, “appropriate”, or “sufficient” unless they are defined or supported by explicit criteria.
+## Commit and pull request discipline
 
-## Commit discipline
-
-Commit messages should be concise and describe one logical change.
-
-Recommended format:
-
-```text
-BUILD-NNN: Imperative description
-```
-
-Examples:
-
-```text
-BUILD-003: Add contribution guide
-BUILD-014: Clarify MF-400 evidence requirements
-```
+- Use one logical change per commit.
+- Write an imperative, descriptive commit message.
+- Avoid mixing formatting cleanup with substantive changes.
+- Explain why the change is needed, not only what changed.
+- Link relevant issues, decisions, reviews, or evidence.
+- Include migration or compatibility notes when applicable.
 
 ## Review expectations
 
-Reviewers should evaluate:
+Contributions may be reviewed for:
 
-- internal consistency
-- terminology and normative language
-- engineering applicability
-- evidence and scientific validity
-- governance and accountability
-- traceability
-- unintended consequences
-- missing requirements or controls
+- purpose and scope;
+- internal consistency;
+- quality and sufficiency of evidence;
+- practical usability;
+- risk and safety implications;
+- traceability;
+- compliance with governance and repository conventions.
 
-A review should identify both strengths and weaknesses. Findings should be specific, reproducible, and actionable.
+Use the Review Kit for material changes. A reviewer may request clarification, evidence, revision, or rejection. Critical and Major findings must be resolved or explicitly accepted by an authorized decision-maker before approval.
+
+## AI-assisted contributions
+
+AI may assist with drafting, analysis, comparison, testing, or review. The human contributor remains responsible for:
+
+- verifying factual claims;
+- checking cited sources;
+- detecting omissions and fabricated content;
+- protecting confidential or personal information;
+- approving the final contribution.
+
+Disclose material AI assistance when it affects provenance, evidence, or reviewability.
 
 ## Conduct
 
-Be respectful, direct, and constructive.
+Be respectful, specific, and constructive. Focus criticism on content, evidence, risk, and implementation. Harassment, personal attacks, deceptive attribution, and deliberate misrepresentation are not acceptable.
 
-Disagreement is expected. Personal attacks, unsupported assertions, and hidden changes are not acceptable.
+## Acceptance
 
-The objective is not to defend existing text. The objective is to improve the framework.
+A contribution is accepted only when it:
+
+1. has an identified owner;
+2. satisfies applicable review requirements;
+3. has no unresolved blocking findings;
+4. is traceable to its rationale and evidence;
+5. is merged or otherwise approved through the repository's governance process.
