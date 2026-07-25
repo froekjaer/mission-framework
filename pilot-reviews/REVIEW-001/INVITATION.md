@@ -4,17 +4,26 @@
 
 You are invited to participate as an independent architect and builder in Mission Framework REVIEW-001.
 
-## Source system
+## Source system — strictly read-only
 
 - Repository: `froekjaer/timelapse-pro`
 - Frozen source baseline: commit `eed9e3c8c67369e1924c25a11908616220c3c753`
-- The source repository is evidence and reference. Do not modify its `main` branch as part of this exercise.
+- You are expected to read and evaluate both the documentation and the source code from this frozen baseline.
+- The entire `froekjaer/timelapse-pro` repository is read-only for this exercise.
+- Do not commit, push, create branches, open or modify pull requests or issues, change configuration, or otherwise write to `froekjaer/timelapse-pro`.
+- Treat its documentation, code, ADRs, tests, runtime evidence and history as source evidence and migration input only.
 
-## Destination
+## Destination — all new work lives here
 
 - Repository: `froekjaer/Mission-Platform`
+- All architecture, documentation, ADRs, schemas, code, tests, tooling, migration work and proof-of-concepts created during REVIEW-001 must be written only to your assigned reviewer branch in `froekjaer/Mission-Platform`.
 - Your work must remain isolated in the reviewer workspace assigned to you.
 - Do not inspect or reuse another reviewer’s work before independent submission.
+- Do not merge your reviewer branch directly into `main`.
+
+In operational terms:
+
+> Read and evaluate `froekjaer/timelapse-pro`; build the new modular solution in `froekjaer/Mission-Platform`.
 
 ## Mission
 
@@ -58,7 +67,7 @@ Guiding principle:
 
 ## Existing architecture is evidence, not an unquestionable answer
 
-Accepted ADRs and current operating evidence in TimeLapse Pro form the baseline. You must understand them before changing direction. You may challenge or replace an accepted architecture decision only through a new ADR that describes:
+Accepted ADRs and current operating evidence in TimeLapse Pro form the baseline. You must understand them before changing direction. You may challenge or replace an accepted architecture decision in your Mission Platform proposal only through a new ADR written in your assigned Mission Platform branch. That ADR must describe:
 
 - the decision being challenged;
 - the evidence and reasoning;
@@ -67,13 +76,16 @@ Accepted ADRs and current operating evidence in TimeLapse Pro form the baseline.
 - security, safety, operational and regulatory effects;
 - a reversible validation path.
 
+No such challenge authorizes a change to `froekjaer/timelapse-pro` during REVIEW-001.
+
 ## Freedom and constraints
 
-You may restructure code, create contracts and schemas, add ADRs, build proof-of-concepts, migrate components and propose new technology.
+Within your assigned `froekjaer/Mission-Platform` branch, you may restructure code, create contracts and schemas, add ADRs, build proof-of-concepts, migrate components and propose new technology.
 
 You must:
 
-- preserve the frozen source baseline reference;
+- preserve the frozen TimeLapse Pro source baseline reference;
+- record which source components were reused, adapted, rewritten or rejected;
 - keep changes reversible until validated;
 - avoid hard deletion of source evidence;
 - separate platform and payload concerns;
@@ -102,7 +114,7 @@ In addition to your own solution, recommend who or what type of contributor is b
 
 ## Required outputs
 
-Your workspace must contain at minimum:
+Your Mission Platform workspace must contain at minimum:
 
 - executive summary;
 - business and stakeholder architecture;
@@ -113,6 +125,7 @@ Your workspace must contain at minimum:
 - AI and capability allocation model;
 - target repository structure;
 - migration strategy from TimeLapse Pro;
+- source-to-target traceability showing reused, adapted, rewritten and rejected elements;
 - risk register and assumptions;
 - ADRs for material choices;
 - implementation roadmap;
