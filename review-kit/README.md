@@ -53,7 +53,8 @@ The Review Kit consists of:
 - `reviewer-mission.md` — reviewer responsibilities and conduct;
 - `review-template.md` — standard review record;
 - `severity-classification.md` — consistent finding severity;
-- `evidence-standard.md` — evidence quality and traceability requirements when added.
+- `evidence-standard.md` — evidence quality and traceability requirements when added;
+- `regulatory-horizon.md` — governed horizon scan of regulations that MAY apply. Reviewers SHALL assess applicability of listed instruments against the specific review scope; they SHALL NOT assume every listed instrument applies. The horizon is a scanning artefact, not legal advice.
 
 ## Review process
 

@@ -63,7 +63,22 @@ All of the following SHALL be present in the workspace:
 - [ ] Privileges and capabilities fail closed.
 - [ ] Data ownership, classification, retention, and deletion are defined.
 - [ ] AI purpose, prompts, provider use, and result ownership are governed.
-- [ ] Relevant GDPR, AI Act, CRA, NIS2, IEC 62443, and ISO 27000 implications are mapped or marked not applicable with rationale.
+- [ ] Relevant GDPR, AI Act, CRA, NIS2, IEC 62443, and ISO 27000 implications are mapped or marked not applicable with rationale, with reference to the [`regulatory-horizon`](../../review-kit/regulatory-horizon.md) where applicable.
+
+## Risk perspectives
+
+Risk SHALL be considered from two distinct perspectives, per [`reviews/MIAR/RISK-METHOD.md`](../../reviews/MIAR/RISK-METHOD.md):
+
+1. **Project and implementation risk** — risks to the project, system, implementation, governance, adoption and long-term viability.
+2. **Cybersecurity, architecture and regulatory risk** — risks arising from architecture, software, AI, data, operations, supply chain, privacy, resilience and legal obligations.
+
+### Fairness notice (REVIEW-001)
+
+The original REVIEW-001 invitation did not explicitly require two separate risk registers. Therefore a REVIEW-001 submission SHALL NOT be marked non-compliant solely because it combined the two perspectives into one register. A combined register is acceptable for REVIEW-001; the Meta Review MAY normalise it into the two perspectives for comparison while preserving the reviewer's original evidence and intent.
+
+### Prospective rule (from REVIEW-002 onward)
+
+From REVIEW-002 onward, reviewers SHALL submit two separate risk analyses following [`reviews/MIAR/RISK-METHOD.md`](../../reviews/MIAR/RISK-METHOD.md), unless the review invitation explicitly states otherwise. This prospective rule does not apply to REVIEW-001.
 
 ## Evidence and quality — MUST
 
