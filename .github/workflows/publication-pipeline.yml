@@ -85,7 +85,7 @@ jobs:
               if absent:
                   errors.append(f"{profile}: missing keys: {', '.join(absent)}")
               if data.get('id') != profile.stem:
-                  errors.append(f"{profile}: id must match filename")
+                  errors.append(f'{profile}: id must match filename')
               if not isinstance(data.get('outputs'), list) or not data['outputs']:
                   errors.append(f'{profile}: outputs must be a non-empty list')
           if errors:
@@ -95,6 +95,9 @@ jobs:
 
       - name: Render all publications
         run: python publication/build.py
+
+      - name: Fix and validate GitHub Pages links
+        run: python publication/fix_pages_links.py
 
       - name: Show generated files
         run: find dist -type f -printf '%p\n' | sort
