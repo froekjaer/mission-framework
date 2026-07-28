@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+<title id="title">Mission Framework overview</title>
+<desc id="desc">Mission at the centre, connected to intent, authority, operational reality, evidence, decision-making, governance and continuous improvement across humans, organisations and machines.</desc>
+<defs>
+  <style>
+    .bg{fill:#f5f7fb}.panel{fill:#fff;stroke:#d9e1ec;stroke-width:2}.core{fill:#2457d6;stroke:#183f9f;stroke-width:3}.soft{fill:#eaf0ff;stroke:#9fb5ea;stroke-width:2}.outer{fill:#13254a;stroke:#13254a;stroke-width:2}.t{font-family:Arial,sans-serif;fill:#182033}.w{font-family:Arial,sans-serif;fill:#fff}.h{font-size:34px;font-weight:700}.m{font-size:24px;font-weight:700}.s{font-size:19px}.line{stroke:#6e7f99;stroke-width:3;fill:none;marker-end:url(#a)}
+  </style>
+  <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6e7f99"/></marker>
+</defs>
+<rect class="bg" width="1400" height="900"/>
+<text class="t h" x="700" y="58" text-anchor="middle">Mission Framework — Overview</text>
+<rect class="panel" x="120" y="110" rx="28" ry="28" width="1160" height="680"/>
+<rect class="outer" x="190" y="155" rx="22" ry="22" width="250" height="92"/><text class="w m" x="315" y="212" text-anchor="middle">Humans</text>
+<rect class="outer" x="575" y="155" rx="22" ry="22" width="250" height="92"/><text class="w m" x="700" y="212" text-anchor="middle">Organisations</text>
+<rect class="outer" x="960" y="155" rx="22" ry="22" width="250" height="92"/><text class="w m" x="1085" y="212" text-anchor="middle">Machines &amp; AI</text>
+<rect class="core" x="530" y="385" rx="34" ry="34" width="340" height="130"/><text class="w h" x="700" y="445" text-anchor="middle">Mission</text><text class="w s" x="700" y="482" text-anchor="middle">purpose, outcome and accountability</text>
+<rect class="soft" x="185" y="320" rx="20" ry="20" width="240" height="92"/><text class="t m" x="305" y="375" text-anchor="middle">Intent</text>
+<rect class="soft" x="185" y="500" rx="20" ry="20" width="240" height="92"/><text class="t m" x="305" y="555" text-anchor="middle">Authority</text>
+<rect class="soft" x="975" y="320" rx="20" ry="20" width="240" height="92"/><text class="t m" x="1095" y="375" text-anchor="middle">Operational Reality</text>
+<rect class="soft" x="975" y="500" rx="20" ry="20" width="240" height="92"/><text class="t m" x="1095" y="555" text-anchor="middle">Evidence</text>
+<rect class="soft" x="305" y="655" rx="20" ry="20" width="240" height="92"/><text class="t m" x="425" y="710" text-anchor="middle">Governance</text>
+<rect class="soft" x="575" y="655" rx="20" ry="20" width="250" height="92"/><text class="t m" x="700" y="710" text-anchor="middle">Decision-Making</text>
+<rect class="soft" x="855" y="655" rx="20" ry="20" width="240" height="92"/><text class="t m" x="975" y="698" text-anchor="middle">Continuous</text><text class="t m" x="975" y="726" text-anchor="middle">Improvement</text>
+<path class="line" d="M315 247 C420 300 500 330 610 389"/><path class="line" d="M700 247 L700 385"/><path class="line" d="M1085 247 C980 300 900 330 790 389"/>
+<path class="line" d="M425 366 L530 420"/><path class="line" d="M425 546 L530 480"/><path class="line" d="M975 366 L870 420"/><path class="line" d="M975 546 L870 480"/>
+<path class="line" d="M425 655 C470 590 520 540 585 500"/><path class="line" d="M700 655 L700 515"/><path class="line" d="M975 655 C930 590 880 540 815 500"/>
+<text class="t s" x="700" y="840" text-anchor="middle">A shared semantic foundation connecting mission purpose, operational reality, evidence and accountable action.</text>
+</svg>
