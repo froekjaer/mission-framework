@@ -4,6 +4,7 @@ language: en
 status: pre-review
 sources:
   - README.md
+  - docs/visuals/VISUAL-OVERVIEW.md
   - PRINCIPIA_MISSIONIS.md
   - MISSION_THEORY.md
   - REALITY_MODEL.md
