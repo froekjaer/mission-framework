@@ -20,11 +20,15 @@ A semantic and evidence-oriented framework for missions
 - Reality can overturn plans and claims
 - Shared semantics across humans, organisations and machines
 
+# Mission Framework overview
+
+![Mission Framework overview](../docs/visuals/mission-framework-overview.svg)
+
 # Mission Loop
 
-The canonical Mission Loop is defined in the repository glossary.
+![Mission Loop](../docs/visuals/mission-loop.svg)
 
-This presentation is an interpretation and does not replace that normative source.
+The canonical Mission Loop is defined in the repository glossary. This presentation is an interpretation and does not replace that normative source.
 
 # Trust Engineering
 
@@ -34,6 +38,8 @@ This presentation is an interpretation and does not replace that normative sourc
 - Independent assurance challenges rather than decorates the framework
 
 # Publication governance
+
+![Governed Publication Pipeline](../docs/visuals/publication-pipeline.svg)
 
 - Markdown remains canonical
 - Books, PDFs, slides and web pages are derived
