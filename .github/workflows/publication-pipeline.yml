@@ -1,3 +1,4 @@
+# Sole GitHub Pages deployment for Mission Framework.
 name: Publication Pipeline
 
 on:
@@ -20,7 +21,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: publication-${{ github.ref }}
+  group: pages
   cancel-in-progress: true
 
 jobs:
