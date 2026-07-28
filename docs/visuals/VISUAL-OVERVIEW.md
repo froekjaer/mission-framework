@@ -4,18 +4,18 @@ The following figures provide a visual entry point into Mission Framework. They 
 
 ## Mission Framework overview
 
-![Mission Framework overview](docs/visuals/mission-framework-overview.svg)
+![Mission Framework overview](https://raw.githubusercontent.com/froekjaer/mission-framework/main/docs/visuals/mission-framework-overview.svg)
 
 **Figure 1. Mission Framework overview.** The mission is placed at the centre and connected to intent, authority, operational reality, evidence, decision-making, governance and continuous improvement across humans, organisations and machines.
 
 ## Mission Loop
 
-![Mission Loop](docs/visuals/mission-loop.svg)
+![Mission Loop](https://raw.githubusercontent.com/froekjaer/mission-framework/main/docs/visuals/mission-loop.svg)
 
 **Figure 2. Mission Loop.** Missions are treated as iterative cycles in which reality, evidence, decisions, action and learning continually reshape the next cycle.
 
 ## Governed Publication Pipeline
 
-![Governed Publication Pipeline](docs/visuals/publication-pipeline.svg)
+![Governed Publication Pipeline](https://raw.githubusercontent.com/froekjaer/mission-framework/main/docs/visuals/publication-pipeline.svg)
 
 **Figure 3. Governed Publication Pipeline.** Multiple audience-specific publications are derived from the same canonical knowledge while source revision, review state, provenance and integrity remain visible.
