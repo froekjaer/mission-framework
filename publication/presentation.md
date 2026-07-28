@@ -22,11 +22,11 @@ A semantic and evidence-oriented framework for missions
 
 # Mission Framework overview
 
-![Mission Framework overview](../docs/visuals/mission-framework-overview.svg)
+![Mission Framework overview](docs/visuals/mission-framework-overview.svg)
 
 # Mission Loop
 
-![Mission Loop](../docs/visuals/mission-loop.svg)
+![Mission Loop](docs/visuals/mission-loop.svg)
 
 The canonical Mission Loop is defined in the repository glossary. This presentation is an interpretation and does not replace that normative source.
 
@@ -39,7 +39,7 @@ The canonical Mission Loop is defined in the repository glossary. This presentat
 
 # Publication governance
 
-![Governed Publication Pipeline](../docs/visuals/publication-pipeline.svg)
+![Governed Publication Pipeline](docs/visuals/publication-pipeline.svg)
 
 - Markdown remains canonical
 - Books, PDFs, slides and web pages are derived
