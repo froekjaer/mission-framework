@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+<title id="title">Mission Loop</title><desc id="desc">An iterative loop from mission through observation, evidence, understanding, decision, action and learning back to mission.</desc>
+<defs><style>.bg{fill:#f5f7fb}.node{fill:#fff;stroke:#9fb5ea;stroke-width:3}.core{fill:#2457d6;stroke:#183f9f;stroke-width:3}.t{font-family:Arial,sans-serif;fill:#182033}.w{font-family:Arial,sans-serif;fill:#fff}.h{font-size:34px;font-weight:700}.m{font-size:22px;font-weight:700}.s{font-size:18px}.line{stroke:#6e7f99;stroke-width:4;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="11" markerHeight="11" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#6e7f99"/></marker></defs>
+<rect class="bg" width="1400" height="760"/><text class="t h" x="700" y="58" text-anchor="middle">Mission Loop</text>
+<rect class="core" x="545" y="105" rx="28" width="310" height="100"/><text class="w m" x="700" y="165" text-anchor="middle">Understand Mission</text>
+<rect class="node" x="955" y="210" rx="24" width="270" height="90"/><text class="t m" x="1090" y="265" text-anchor="middle">Observe Reality</text>
+<rect class="node" x="1040" y="430" rx="24" width="270" height="90"/><text class="t m" x="1175" y="485" text-anchor="middle">Gather Evidence</text>
+<rect class="node" x="665" y="575" rx="24" width="270" height="90"/><text class="t m" x="800" y="630" text-anchor="middle">Build Understanding</text>
+<rect class="node" x="270" y="520" rx="24" width="250" height="90"/><text class="t m" x="395" y="575" text-anchor="middle">Decide</text>
+<rect class="node" x="95" y="310" rx="24" width="250" height="90"/><text class="t m" x="220" y="365" text-anchor="middle">Act</text>
+<rect class="node" x="270" y="150" rx="24" width="250" height="90"/><text class="t m" x="395" y="205" text-anchor="middle">Review &amp; Learn</text>
+<path class="line" d="M855 155 C925 165 980 190 1025 220"/><path class="line" d="M1170 300 C1205 340 1210 385 1195 430"/><path class="line" d="M1070 520 C1005 560 950 585 900 600"/><path class="line" d="M665 620 C600 625 550 610 500 585"/><path class="line" d="M270 550 C210 520 175 470 160 400"/><path class="line" d="M210 310 C245 260 285 225 335 205"/><path class="line" d="M520 180 C545 165 565 158 590 155"/>
+<text class="t s" x="700" y="720" text-anchor="middle">Reality can revise the mission; evidence can revise confidence; learning changes the next cycle.</text>
+</svg>
