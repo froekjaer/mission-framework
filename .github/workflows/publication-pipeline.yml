@@ -1,19 +1,10 @@
 # Sole GitHub Pages deployment for Mission Framework.
-name: Publication Pipeline
+name: Publication Hub
 
 on:
   workflow_dispatch:
-  pull_request:
-    paths:
-      - '**/*.md'
-      - 'publication/**'
-      - '.github/workflows/publication-pipeline.yml'
   push:
     branches: [main]
-    paths:
-      - '**/*.md'
-      - 'publication/**'
-      - '.github/workflows/publication-pipeline.yml'
 
 permissions:
   contents: read
@@ -26,106 +17,100 @@ concurrency:
 
 jobs:
   build:
-    name: Build publication suite
     runs-on: ubuntu-latest
     steps:
-      - name: Check out source revision
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Configure GitHub Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/configure-pages@v5
-
-      - name: Install renderers
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends pandoc
-          python -m pip install --disable-pip-version-check pyyaml weasyprint
-
-      - name: Validate publication profiles
+      - name: Build stable Publication Hub
         shell: python
         run: |
           from pathlib import Path
-          import sys
-          import yaml
+          import html, json, re, os
 
-          required = [
-              Path('docs/publication/PUBLICATION-PIPELINE.md'),
-              Path('publication/README.md'),
-              Path('publication/book.yml'),
-              Path('publication/executive-brief.md'),
-              Path('publication/presentation.md'),
-              Path('publication/build.py'),
+          root = Path('.')
+          site = Path('dist/site')
+          (site / 'book').mkdir(parents=True, exist_ok=True)
+          (site / 'brief').mkdir(parents=True, exist_ok=True)
+          (site / 'presentation').mkdir(parents=True, exist_ok=True)
+
+          def convert(md: str, title: str) -> str:
+              out, in_list = [], False
+              for raw in md.splitlines():
+                  line = raw.rstrip()
+                  if line.startswith('# '):
+                      if in_list: out.append('</ul>'); in_list = False
+                      out.append(f'<h1>{html.escape(line[2:])}</h1>')
+                  elif line.startswith('## '):
+                      if in_list: out.append('</ul>'); in_list = False
+                      out.append(f'<h2>{html.escape(line[3:])}</h2>')
+                  elif line.startswith('### '):
+                      if in_list: out.append('</ul>'); in_list = False
+                      out.append(f'<h3>{html.escape(line[4:])}</h3>')
+                  elif line.startswith('- '):
+                      if not in_list: out.append('<ul>'); in_list = True
+                      text = html.escape(line[2:])
+                      text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+                      out.append(f'<li>{text}</li>')
+                  elif line.startswith('> '):
+                      if in_list: out.append('</ul>'); in_list = False
+                      out.append(f'<blockquote>{html.escape(line[2:])}</blockquote>')
+                  elif line.strip():
+                      if in_list: out.append('</ul>'); in_list = False
+                      text = html.escape(line)
+                      text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+                      out.append(f'<p>{text}</p>')
+              if in_list: out.append('</ul>')
+              return f'''<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(title)}</title><style>body{{font-family:system-ui,-apple-system,sans-serif;max-width:900px;margin:3rem auto;padding:0 1.2rem;line-height:1.68;color:#182033}}h1{{font-size:2.6rem}}h2{{margin-top:2.2rem}}blockquote{{border-left:4px solid #2457d6;padding-left:1rem;color:#5f6b7a}}a{{color:#2457d6}}</style></head><body>{''.join(out)}<hr><p><a href="../">Tilbage til Publication Hub</a></p></body></html>'''
+
+          sources = [
+              'README.md','PRINCIPIA_MISSIONIS.md','MISSION_THEORY.md','REALITY_MODEL.md',
+              'EVIDENCE_MODEL.md','COMPUTATIONAL_TRUST_ENGINEERING.md','ARCHITECTURE.md','GLOSSARY.md'
           ]
-          missing = [str(path) for path in required if not path.is_file()]
+          book_parts = []
+          for name in sources:
+              p = root / name
+              if p.is_file():
+                  book_parts.append(p.read_text(encoding='utf-8'))
+          book = '\n\n---\n\n'.join(book_parts)
+          brief = (root / 'publication/executive-brief.md').read_text(encoding='utf-8')
+          presentation = (root / 'publication/presentation.md').read_text(encoding='utf-8')
+
+          (site / 'book/index.html').write_text(convert(book, 'Mission Framework — Bog'), encoding='utf-8')
+          (site / 'brief/index.html').write_text(convert(brief, 'Mission Framework — Executive Brief'), encoding='utf-8')
+          (site / 'presentation/index.html').write_text(convert(presentation, 'Mission Framework — Præsentation'), encoding='utf-8')
+          (site / '.nojekyll').write_text('', encoding='utf-8')
+
+          sha = os.environ.get('GITHUB_SHA', '')[:12]
+          cards = [
+              ('📘','Bog','Den sammenhængende læseudgave af Mission Framework.','book/','Læs bogen'),
+              ('📄','Executive Brief','En kort introduktion til formål, principper og anvendelse.','brief/','Læs brief'),
+              ('🎤','Præsentation','En introduktion til møder, dialog og review.','presentation/','Se præsentation'),
+          ]
+          card_html = ''.join(f'<article class="card"><div class="icon">{i}</div><h2>{t}</h2><p>{d}</p><a class="button" href="{u}">{b}</a></article>' for i,t,d,u,b in cards)
+          index = f'''<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mission Framework — Publication Hub</title><style>:root{{--bg:#f5f7fb;--surface:#fff;--text:#182033;--muted:#5f6b7a;--line:#dfe5ee;--accent:#2457d6;--radius:18px}}*{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.6}}header{{background:linear-gradient(135deg,#13254a,#2457d6);color:#fff;padding:4.8rem 1.25rem 4rem}}.wrap{{max-width:1120px;margin:auto}}.eyebrow{{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;opacity:.82}}h1{{font-size:clamp(2.4rem,7vw,5rem);line-height:1.04;margin:.5rem 0 1rem}}.lead{{font-size:1.25rem;max-width:780px;color:#e8eeff}}.pill{{display:inline-block;background:#ffffff22;border:1px solid #ffffff47;padding:.45rem .75rem;border-radius:999px;margin-top:1rem}}main{{padding:2.5rem 1.25rem 5rem}}.intro,.card{{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px #1622400f}}.intro{{padding:1.5rem;margin-bottom:1.5rem}}.grid{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}}.card{{padding:1.6rem;display:flex;flex-direction:column;min-height:260px}}.icon{{font-size:2rem}}.card p{{color:var(--muted);flex:1}}.button{{display:inline-block;text-decoration:none;border-radius:10px;padding:.7rem 1rem;font-weight:700;background:var(--accent);color:#fff;text-align:center}}footer{{border-top:1px solid var(--line);padding:2rem 1.25rem;color:var(--muted)}}@media(max-width:760px){{.grid{{grid-template-columns:1fr}}}}</style></head><body><header><div class="wrap"><div class="eyebrow">Official Publication Hub</div><h1>Mission Framework</h1><p class="lead">Vælg den publikation, der passer til dit formål. Alt indhold er genereret fra repositoryets styrede Markdown-kilder.</p><span class="pill">Build {sha}</span></div></header><main class="wrap"><section class="intro"><h2>Start her</h2><p>Ny læser: Executive Brief. Dyb forståelse: bogen. Møde eller oplæg: præsentationen.</p></section><section class="grid">{card_html}</section></main><footer><div class="wrap">Mission Framework Publication Hub</div></footer></body></html>'''
+          (site / 'index.html').write_text(index, encoding='utf-8')
+          (site / 'publication-catalog.json').write_text(json.dumps({'project':'Mission Framework','source_commit':os.environ.get('GITHUB_SHA'),'publications':['book','brief','presentation']}, indent=2), encoding='utf-8')
+
+          required = [site/'index.html', site/'book/index.html', site/'brief/index.html', site/'presentation/index.html']
+          missing = [str(p) for p in required if not p.is_file()]
           if missing:
-              print('Missing required publication files:')
-              print('\n'.join(f'- {path}' for path in missing))
-              sys.exit(1)
+              raise SystemExit('Missing generated pages: ' + ', '.join(missing))
 
-          profiles = sorted(Path('publication/profiles').glob('*.yml'))
-          errors = []
-          required_keys = {'id', 'status', 'purpose', 'outputs'}
-          for profile in profiles:
-              try:
-                  data = yaml.safe_load(profile.read_text(encoding='utf-8'))
-              except Exception as exc:
-                  errors.append(f'{profile}: invalid YAML: {exc}')
-                  continue
-              if not isinstance(data, dict):
-                  errors.append(f'{profile}: profile root must be a mapping')
-                  continue
-              absent = sorted(required_keys - set(data))
-              if absent:
-                  errors.append(f"{profile}: missing keys: {', '.join(absent)}")
-              if data.get('id') != profile.stem:
-                  errors.append(f'{profile}: id must match filename')
-              if not isinstance(data.get('outputs'), list) or not data['outputs']:
-                  errors.append(f'{profile}: outputs must be a non-empty list')
-          if errors:
-              print('\n'.join(f'- {error}' for error in errors))
-              sys.exit(1)
-          print(f'Validated {len(profiles)} publication profiles.')
-
-      - name: Render all publications
-        run: python publication/build.py
-
-      - name: Fix and validate GitHub Pages links
-        run: python publication/fix_pages_links.py
-
-      - name: Show generated files
-        run: find dist -type f -printf '%p\n' | sort
-
-      - name: Upload complete publication suite
-        uses: actions/upload-artifact@v4
-        with:
-          name: mission-framework-publications-${{ github.sha }}
-          path: dist/
-          if-no-files-found: error
-          retention-days: 30
-
-      - name: Upload GitHub Pages artefact
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/site
 
-  deploy-pages:
-    name: Publish GitHub Pages
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: build
-    runs-on: ubuntu-latest
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
     steps:
-      - name: Deploy generated site
+      - name: Deploy Publication Hub
         id: deployment
         uses: actions/deploy-pages@v4
