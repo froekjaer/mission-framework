@@ -20,85 +20,181 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/configure-pages@v5
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Build stable Publication Hub
+      - name: Install publication renderers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends pandoc
+          python -m pip install --disable-pip-version-check pyyaml weasyprint
+
+      - name: Build complete Publication Hub
         shell: python
         run: |
           from pathlib import Path
-          import html, json, re, os
+          import hashlib
+          import html
+          import json
+          import os
+          import shutil
+          import subprocess
+          import zipfile
+          import yaml
 
           root = Path('.')
-          site = Path('dist/site')
-          (site / 'book').mkdir(parents=True, exist_ok=True)
-          (site / 'brief').mkdir(parents=True, exist_ok=True)
-          (site / 'presentation').mkdir(parents=True, exist_ok=True)
+          dist = Path('dist')
+          site = dist / 'site'
+          work = Path('build/publication-pages')
+          shutil.rmtree(dist, ignore_errors=True)
+          shutil.rmtree(work, ignore_errors=True)
+          for directory in ['book', 'brief', 'presentation', 'review-package', 'manifests', 'source']:
+              (site / directory).mkdir(parents=True, exist_ok=True)
+          work.mkdir(parents=True, exist_ok=True)
 
-          def convert(md: str, title: str) -> str:
-              out, in_list = [], False
-              for raw in md.splitlines():
-                  line = raw.rstrip()
-                  if line.startswith('# '):
-                      if in_list: out.append('</ul>'); in_list = False
-                      out.append(f'<h1>{html.escape(line[2:])}</h1>')
-                  elif line.startswith('## '):
-                      if in_list: out.append('</ul>'); in_list = False
-                      out.append(f'<h2>{html.escape(line[3:])}</h2>')
-                  elif line.startswith('### '):
-                      if in_list: out.append('</ul>'); in_list = False
-                      out.append(f'<h3>{html.escape(line[4:])}</h3>')
-                  elif line.startswith('- '):
-                      if not in_list: out.append('<ul>'); in_list = True
-                      text = html.escape(line[2:])
-                      text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
-                      out.append(f'<li>{text}</li>')
-                  elif line.startswith('> '):
-                      if in_list: out.append('</ul>'); in_list = False
-                      out.append(f'<blockquote>{html.escape(line[2:])}</blockquote>')
-                  elif line.strip():
-                      if in_list: out.append('</ul>'); in_list = False
-                      text = html.escape(line)
-                      text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
-                      out.append(f'<p>{text}</p>')
-              if in_list: out.append('</ul>')
-              return f'''<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(title)}</title><style>body{{font-family:system-ui,-apple-system,sans-serif;max-width:900px;margin:3rem auto;padding:0 1.2rem;line-height:1.68;color:#182033}}h1{{font-size:2.6rem}}h2{{margin-top:2.2rem}}blockquote{{border-left:4px solid #2457d6;padding-left:1rem;color:#5f6b7a}}a{{color:#2457d6}}</style></head><body>{''.join(out)}<hr><p><a href="../">Tilbage til Publication Hub</a></p></body></html>'''
+          sha = os.environ.get('GITHUB_SHA', '')
+          short_sha = sha[:12]
 
-          sources = [
-              'README.md','PRINCIPIA_MISSIONIS.md','MISSION_THEORY.md','REALITY_MODEL.md',
-              'EVIDENCE_MODEL.md','COMPUTATIONAL_TRUST_ENGINEERING.md','ARCHITECTURE.md','GLOSSARY.md'
+          def run(*args):
+              print('+', ' '.join(map(str, args)))
+              subprocess.run([str(x) for x in args], check=True)
+
+          config = yaml.safe_load((root / 'publication/book.yml').read_text(encoding='utf-8'))
+          declared = list(config.get('sources', [])) + list(config.get('appendices', []))
+          sources = [root / name for name in declared if (root / name).is_file()]
+          missing = [name for name in declared if not (root / name).is_file()]
+          if not sources:
+              raise SystemExit('No declared publication sources found')
+
+          provenance = (
+              '---\n'
+              f'title: {config.get("title", "Mission Framework")}\n'
+              f'source-repository: {os.environ.get("GITHUB_REPOSITORY", "froekjaer/mission-framework")}\n'
+              f'source-commit: {sha}\n'
+              'review-status: pre-review\n'
+              '---\n\n'
+              '> **Derived publication.** Canonical meaning remains in the repository Markdown at the source commit shown above.\n\n'
+          )
+          book_md = work / 'book.md'
+          parts = [provenance]
+          for source in sources:
+              parts.append(f'\n\n<!-- source: {source.as_posix()} -->\n\n')
+              parts.append(source.read_text(encoding='utf-8'))
+          book_md.write_text(''.join(parts), encoding='utf-8')
+
+          # Book formats
+          run('pandoc', book_md, '--from=gfm+yaml_metadata_block', '--standalone', '--toc',
+              '--metadata', 'title=Mission Framework', '-o', site/'book/Mission-Framework.html')
+          run('pandoc', book_md, '--from=gfm+yaml_metadata_block', '--standalone', '--toc',
+              '-o', site/'book/Mission-Framework.docx')
+          run('pandoc', book_md, '--from=gfm+yaml_metadata_block', '--standalone', '--toc',
+              '-o', site/'book/Mission-Framework.epub')
+          run('weasyprint', site/'book/Mission-Framework.html', site/'book/Mission-Framework.pdf')
+          shutil.copy2(book_md, site/'book/Mission-Framework.md')
+          shutil.copy2(site/'book/Mission-Framework.html', site/'book/index.html')
+
+          # Executive brief formats
+          brief_source = root / 'publication/executive-brief.md'
+          brief_md = work / 'executive-brief.md'
+          brief_md.write_text(provenance.replace(config.get('title', 'Mission Framework'), 'Mission Framework — Executive Brief', 1) + brief_source.read_text(encoding='utf-8'), encoding='utf-8')
+          run('pandoc', brief_md, '--from=gfm+yaml_metadata_block', '--standalone', '--toc',
+              '-o', site/'brief/Mission-Framework-Executive-Brief.html')
+          run('pandoc', brief_md, '--from=gfm+yaml_metadata_block', '--standalone', '--toc',
+              '-o', site/'brief/Mission-Framework-Executive-Brief.docx')
+          run('weasyprint', site/'brief/Mission-Framework-Executive-Brief.html', site/'brief/Mission-Framework-Executive-Brief.pdf')
+          shutil.copy2(brief_md, site/'brief/Mission-Framework-Executive-Brief.md')
+          shutil.copy2(site/'brief/Mission-Framework-Executive-Brief.html', site/'brief/index.html')
+
+          # Presentation formats
+          presentation_source = root / 'publication/presentation.md'
+          presentation_md = work / 'presentation.md'
+          presentation_md.write_text(provenance.replace(config.get('title', 'Mission Framework'), 'Mission Framework — Presentation', 1) + presentation_source.read_text(encoding='utf-8'), encoding='utf-8')
+          run('pandoc', presentation_md, '--from=gfm+yaml_metadata_block', '--slide-level=1',
+              '-o', site/'presentation/Mission-Framework-Introduction.pptx')
+          run('pandoc', presentation_md, '--from=gfm+yaml_metadata_block', '--standalone',
+              '-o', site/'presentation/Mission-Framework-Introduction.html')
+          run('weasyprint', site/'presentation/Mission-Framework-Introduction.html', site/'presentation/Mission-Framework-Introduction.pdf')
+          shutil.copy2(presentation_md, site/'presentation/Mission-Framework-Introduction.md')
+          shutil.copy2(site/'presentation/Mission-Framework-Introduction.html', site/'presentation/index.html')
+
+          # Canonical source views
+          source_links = []
+          for source in sources:
+              slug = source.as_posix().replace('/', '--').replace('.md', '.html')
+              target = site / 'source' / slug
+              run('pandoc', source, '--from=gfm', '--standalone', '--toc', '-o', target)
+              source_links.append((source.as_posix(), f'source/{slug}'))
+
+          # Review package
+          review_root = work / 'Mission-Framework-Review-Package'
+          for directory in ['book', 'brief', 'presentation']:
+              shutil.copytree(site / directory, review_root / directory, dirs_exist_ok=True)
+          for relative in ['reviews/MIAR/README.md', 'reviews/MIAR/INTRODUCTION-AND-ASSURANCE-FLOW.md', 'reviews/MIAR/ORGANISATION-INTRODUCTION-TEMPLATE.md']:
+              source = root / relative
+              if source.is_file():
+                  target = review_root / relative
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  shutil.copy2(source, target)
+          review_zip = site / 'review-package/Mission-Framework-Review-Package.zip'
+          with zipfile.ZipFile(review_zip, 'w', zipfile.ZIP_DEFLATED) as archive:
+              for path in review_root.rglob('*'):
+                  if path.is_file():
+                      archive.write(path, path.relative_to(review_root.parent))
+
+          catalog = {
+              'project': 'Mission Framework',
+              'source_repository': os.environ.get('GITHUB_REPOSITORY'),
+              'source_commit': sha,
+              'review_status': 'pre-review',
+              'missing_declared_sources': missing,
+              'publications': [
+                  {'id':'book','formats':{'read_online':'book/','pdf':'book/Mission-Framework.pdf','epub':'book/Mission-Framework.epub','docx':'book/Mission-Framework.docx','markdown':'book/Mission-Framework.md'}},
+                  {'id':'executive-brief','formats':{'read_online':'brief/','pdf':'brief/Mission-Framework-Executive-Brief.pdf','docx':'brief/Mission-Framework-Executive-Brief.docx','markdown':'brief/Mission-Framework-Executive-Brief.md'}},
+                  {'id':'presentation','formats':{'view_online':'presentation/','pptx':'presentation/Mission-Framework-Introduction.pptx','pdf':'presentation/Mission-Framework-Introduction.pdf','markdown':'presentation/Mission-Framework-Introduction.md'}},
+                  {'id':'review-package','formats':{'zip':'review-package/Mission-Framework-Review-Package.zip'}}
+              ]
+          }
+          (site / 'publication-catalog.json').write_text(json.dumps(catalog, indent=2) + '\n', encoding='utf-8')
+
+          cards = [
+              ('📘','Bog','Den komplette, sammenhængende læseudgave af Mission Framework.','book/','Læs online',[('PDF','book/Mission-Framework.pdf'),('EPUB','book/Mission-Framework.epub'),('DOCX','book/Mission-Framework.docx')]),
+              ('📄','Executive Brief','En kort introduktion til formål, principper og anvendelse.','brief/','Læs brief',[('PDF','brief/Mission-Framework-Executive-Brief.pdf'),('DOCX','brief/Mission-Framework-Executive-Brief.docx')]),
+              ('🎤','Præsentation','En præsentabel introduktion til møder, dialog og review.','presentation/','Se online',[('PPTX','presentation/Mission-Framework-Introduction.pptx'),('PDF','presentation/Mission-Framework-Introduction.pdf')]),
+              ('📦','Review Package','Samlet materiale til uafhængig vurdering.','review-package/Mission-Framework-Review-Package.zip','Hent ZIP',[]),
           ]
-          book_parts = []
-          for name in sources:
-              p = root / name
-              if p.is_file():
-                  book_parts.append(p.read_text(encoding='utf-8'))
-          book = '\n\n---\n\n'.join(book_parts)
-          brief = (root / 'publication/executive-brief.md').read_text(encoding='utf-8')
-          presentation = (root / 'publication/presentation.md').read_text(encoding='utf-8')
+          card_html = []
+          for icon, title, description, primary_href, primary_label, secondary in cards:
+              buttons = [f'<a class="button primary" href="{html.escape(primary_href)}">{html.escape(primary_label)}</a>']
+              buttons.extend(f'<a class="button" href="{html.escape(href)}">{html.escape(label)}</a>' for label, href in secondary)
+              card_html.append(f'<article class="card"><div class="icon">{icon}</div><h2>{html.escape(title)}</h2><p>{html.escape(description)}</p><div class="actions">{"".join(buttons)}</div></article>')
+          source_list = ''.join(f'<li><a href="{html.escape(href)}">{html.escape(name)}</a></li>' for name, href in source_links)
 
-          (site / 'book/index.html').write_text(convert(book, 'Mission Framework — Bog'), encoding='utf-8')
-          (site / 'brief/index.html').write_text(convert(brief, 'Mission Framework — Executive Brief'), encoding='utf-8')
-          (site / 'presentation/index.html').write_text(convert(presentation, 'Mission Framework — Præsentation'), encoding='utf-8')
+          index = f'''<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mission Framework — Publication Hub</title><style>:root{{--bg:#f5f7fb;--surface:#fff;--text:#182033;--muted:#5f6b7a;--line:#dfe5ee;--accent:#2457d6;--accent-dark:#183f9f;--soft:#eaf0ff;--radius:18px}}*{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.6}}header{{background:linear-gradient(135deg,#13254a,#2457d6);color:#fff;padding:4.8rem 1.25rem 4rem}}.wrap{{max-width:1120px;margin:auto}}.eyebrow{{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;opacity:.82}}h1{{font-size:clamp(2.4rem,7vw,5rem);line-height:1.04;margin:.5rem 0 1rem}}.lead{{font-size:1.25rem;max-width:780px;color:#e8eeff}}.status{{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem}}.pill{{background:#ffffff22;border:1px solid #ffffff47;padding:.45rem .75rem;border-radius:999px}}main{{padding:2.5rem 1.25rem 5rem}}.intro{{display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;margin-bottom:2rem}}.panel,.card{{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px #1622400f}}.panel{{padding:1.5rem}}.grid{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}}.card{{padding:1.6rem;display:flex;flex-direction:column;min-height:270px}}.icon{{font-size:2rem}}.card p{{color:var(--muted);flex:1}}.actions{{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1rem}}.button{{display:inline-block;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:.65rem .9rem;font-weight:650;background:#fff;color:var(--text)}}.button.primary{{background:var(--accent);border-color:var(--accent);color:#fff}}.machine{{margin-top:2rem;background:var(--soft);border-radius:var(--radius);padding:1.4rem}}details{{margin-top:2rem;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.25rem}}footer{{border-top:1px solid var(--line);padding:2rem 1.25rem;color:var(--muted)}}@media(max-width:760px){{.intro,.grid{{grid-template-columns:1fr}}}}</style></head><body><header><div class="wrap"><div class="eyebrow">Official Publication Hub</div><h1>Mission Framework</h1><p class="lead">Vælg den publikation, der passer til dit formål. Alle udgaver er genereret fra den samme styrede Markdown-kilde.</p><div class="status"><span class="pill">Pre-review</span><span class="pill">Build {short_sha}</span><span class="pill">{len(sources)} kilder</span></div></div></header><main class="wrap"><section class="intro"><div class="panel"><h2>Start her</h2><p><strong>Ny læser:</strong> Executive Brief. <strong>Dyb forståelse:</strong> bogen. <strong>Møde eller oplæg:</strong> præsentationen. <strong>Uafhængig vurdering:</strong> Review Package.</p></div><aside class="panel"><h2>Princip</h2><p><strong>Availability is not usability, and usability is not understanding.</strong></p><p>Audience-Adaptive Knowledge Delivery.</p></aside></section><section class="grid">{"".join(card_html)}</section><section class="machine"><h2>For maskiner og verificering</h2><div class="actions"><a class="button" href="publication-catalog.json">Publication Catalog</a><a class="button" href="manifests/publication-manifest.json">Provenance Manifest</a><a class="button" href="manifests/SHA256SUMS">SHA-256 Checksums</a></div></section><details><summary>Kanoniske kilder og teknisk sporbarhed</summary><ul>{source_list}</ul></details></main><footer><div class="wrap">Mission Framework Publication Hub · source {short_sha}</div></footer></body></html>'''
+          (site / 'index.html').write_text(index, encoding='utf-8')
           (site / '.nojekyll').write_text('', encoding='utf-8')
 
-          sha = os.environ.get('GITHUB_SHA', '')[:12]
-          cards = [
-              ('📘','Bog','Den sammenhængende læseudgave af Mission Framework.','book/','Læs bogen'),
-              ('📄','Executive Brief','En kort introduktion til formål, principper og anvendelse.','brief/','Læs brief'),
-              ('🎤','Præsentation','En introduktion til møder, dialog og review.','presentation/','Se præsentation'),
-          ]
-          card_html = ''.join(f'<article class="card"><div class="icon">{i}</div><h2>{t}</h2><p>{d}</p><a class="button" href="{u}">{b}</a></article>' for i,t,d,u,b in cards)
-          index = f'''<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mission Framework — Publication Hub</title><style>:root{{--bg:#f5f7fb;--surface:#fff;--text:#182033;--muted:#5f6b7a;--line:#dfe5ee;--accent:#2457d6;--radius:18px}}*{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.6}}header{{background:linear-gradient(135deg,#13254a,#2457d6);color:#fff;padding:4.8rem 1.25rem 4rem}}.wrap{{max-width:1120px;margin:auto}}.eyebrow{{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;opacity:.82}}h1{{font-size:clamp(2.4rem,7vw,5rem);line-height:1.04;margin:.5rem 0 1rem}}.lead{{font-size:1.25rem;max-width:780px;color:#e8eeff}}.pill{{display:inline-block;background:#ffffff22;border:1px solid #ffffff47;padding:.45rem .75rem;border-radius:999px;margin-top:1rem}}main{{padding:2.5rem 1.25rem 5rem}}.intro,.card{{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px #1622400f}}.intro{{padding:1.5rem;margin-bottom:1.5rem}}.grid{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}}.card{{padding:1.6rem;display:flex;flex-direction:column;min-height:260px}}.icon{{font-size:2rem}}.card p{{color:var(--muted);flex:1}}.button{{display:inline-block;text-decoration:none;border-radius:10px;padding:.7rem 1rem;font-weight:700;background:var(--accent);color:#fff;text-align:center}}footer{{border-top:1px solid var(--line);padding:2rem 1.25rem;color:var(--muted)}}@media(max-width:760px){{.grid{{grid-template-columns:1fr}}}}</style></head><body><header><div class="wrap"><div class="eyebrow">Official Publication Hub</div><h1>Mission Framework</h1><p class="lead">Vælg den publikation, der passer til dit formål. Alt indhold er genereret fra repositoryets styrede Markdown-kilder.</p><span class="pill">Build {sha}</span></div></header><main class="wrap"><section class="intro"><h2>Start her</h2><p>Ny læser: Executive Brief. Dyb forståelse: bogen. Møde eller oplæg: præsentationen.</p></section><section class="grid">{card_html}</section></main><footer><div class="wrap">Mission Framework Publication Hub</div></footer></body></html>'''
-          (site / 'index.html').write_text(index, encoding='utf-8')
-          (site / 'publication-catalog.json').write_text(json.dumps({'project':'Mission Framework','source_commit':os.environ.get('GITHUB_SHA'),'publications':['book','brief','presentation']}, indent=2), encoding='utf-8')
+          artefacts = []
+          for path in sorted(p for p in site.rglob('*') if p.is_file() and 'manifests' not in p.parts):
+              digest = hashlib.sha256(path.read_bytes()).hexdigest()
+              artefacts.append({'path': str(path.relative_to(site)), 'sha256': digest, 'bytes': path.stat().st_size})
+          manifest = {'pipeline_status':'rendered','source_commit':sha,'missing_declared_sources':missing,'artefacts':artefacts}
+          (site / 'manifests/publication-manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
+          (site / 'manifests/SHA256SUMS').write_text('\n'.join(f"{item['sha256']}  {item['path']}" for item in artefacts) + '\n', encoding='utf-8')
 
-          required = [site/'index.html', site/'book/index.html', site/'brief/index.html', site/'presentation/index.html']
-          missing = [str(p) for p in required if not p.is_file()]
-          if missing:
-              raise SystemExit('Missing generated pages: ' + ', '.join(missing))
+          required = [
+              site/'index.html', site/'book/index.html', site/'book/Mission-Framework.pdf',
+              site/'book/Mission-Framework.docx', site/'book/Mission-Framework.epub',
+              site/'brief/index.html', site/'brief/Mission-Framework-Executive-Brief.pdf',
+              site/'presentation/index.html', site/'presentation/Mission-Framework-Introduction.pptx',
+              site/'review-package/Mission-Framework-Review-Package.zip'
+          ]
+          absent = [str(path) for path in required if not path.is_file()]
+          if absent:
+              raise SystemExit('Missing generated publication files: ' + ', '.join(absent))
 
       - uses: actions/upload-pages-artifact@v3
         with:
