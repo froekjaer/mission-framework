@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="820" viewBox="0 0 1500 820" role="img" aria-labelledby="title desc">
+<title id="title">Publication Pipeline</title><desc id="desc">Canonical Markdown and publication profiles flow through a governed build into books, briefs, presentations, review packages and a website with provenance and checksums.</desc>
+<defs><style>.bg{fill:#f5f7fb}.box{fill:#fff;stroke:#d9e1ec;stroke-width:3}.soft{fill:#eaf0ff;stroke:#9fb5ea;stroke-width:3}.core{fill:#2457d6;stroke:#183f9f;stroke-width:3}.dark{fill:#13254a;stroke:#13254a;stroke-width:3}.t{font-family:Arial,sans-serif;fill:#182033}.w{font-family:Arial,sans-serif;fill:#fff}.h{font-size:34px;font-weight:700}.m{font-size:22px;font-weight:700}.s{font-size:18px}.line{stroke:#6e7f99;stroke-width:4;fill:none;marker-end:url(#a)}</style><marker id="a" markerWidth="11" markerHeight="11" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#6e7f99"/></marker></defs>
+<rect class="bg" width="1500" height="820"/><text class="t h" x="750" y="58" text-anchor="middle">Governed Publication Pipeline</text>
+<rect class="dark" x="80" y="210" rx="26" width="310" height="120"/><text class="w m" x="235" y="262" text-anchor="middle">Canonical Markdown</text><text class="w s" x="235" y="296" text-anchor="middle">concepts, doctrine and evidence</text>
+<rect class="soft" x="80" y="445" rx="26" width="310" height="120"/><text class="t m" x="235" y="497" text-anchor="middle">Publication Profiles</text><text class="t s" x="235" y="531" text-anchor="middle">audience, purpose and format</text>
+<rect class="core" x="540" y="300" rx="34" width="380" height="160"/><text class="w h" x="730" y="362" text-anchor="middle">Build Pipeline</text><text class="w s" x="730" y="400" text-anchor="middle">assemble · render · validate</text><text class="w s" x="730" y="430" text-anchor="middle">package · publish</text>
+<path class="line" d="M390 270 C455 280 495 315 540 350"/><path class="line" d="M390 505 C455 490 500 445 540 410"/>
+<rect class="box" x="1050" y="120" rx="22" width="300" height="86"/><text class="t m" x="1200" y="173" text-anchor="middle">Book</text>
+<rect class="box" x="1050" y="225" rx="22" width="300" height="86"/><text class="t m" x="1200" y="278" text-anchor="middle">Executive Brief</text>
+<rect class="box" x="1050" y="330" rx="22" width="300" height="86"/><text class="t m" x="1200" y="383" text-anchor="middle">Presentation</text>
+<rect class="box" x="1050" y="435" rx="22" width="300" height="86"/><text class="t m" x="1200" y="488" text-anchor="middle">Review Package</text>
+<rect class="box" x="1050" y="540" rx="22" width="300" height="86"/><text class="t m" x="1200" y="593" text-anchor="middle">Publication Hub</text>
+<path class="line" d="M920 350 C980 270 1010 210 1050 165"/><path class="line" d="M920 365 C985 320 1015 285 1050 270"/><path class="line" d="M920 380 L1050 375"/><path class="line" d="M920 395 C985 435 1015 465 1050 478"/><path class="line" d="M920 410 C980 500 1010 555 1050 583"/>
+<rect class="soft" x="480" y="625" rx="26" width="500" height="110"/><text class="t m" x="730" y="670" text-anchor="middle">Provenance &amp; Integrity</text><text class="t s" x="730" y="705" text-anchor="middle">source commit · manifest · checksums · review status</text>
+<path class="line" d="M730 460 L730 625"/>
+<text class="t s" x="750" y="785" text-anchor="middle">One canonical knowledge base; multiple audience-appropriate forms; traceability preserved across every output.</text>
+</svg>
