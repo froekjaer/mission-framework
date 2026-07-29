@@ -21,6 +21,7 @@ Normative words follow the [`terminology-standard`](../../review-kit/terminology
 | Gemini | | | | | | | | | | |
 | Codex | | | | | | | | | | |
 | Z.ai | | | | | | | | | | |
+| Kimi | not started | | | | | | | | no | Added to REVIEW-001 after original six-reviewer setup; invitation and workspace created on `review/review-001-kimi`. |
 | Human | | | | | | | | | | |
 
 ### Field definitions
@@ -44,23 +45,23 @@ Normative words follow the [`terminology-standard`](../../review-kit/terminology
 
 The comparison dimensions below are the **minimum** set. The Meta Review MAY add dimensions; it SHALL NOT remove these without a recorded rationale.
 
-| Dimension | ChatGPT | Claude | Gemini | Codex | Z.ai | Human |
-|---|---|---|---|---|---|---|
-| Architectural thesis | | | | | | |
-| Platform/payload boundary | | | | | | |
-| Payload contract | | | | | | |
-| Isolation model | | | | | | |
-| Deployment model | | | | | | |
-| Event or messaging model | | | | | | |
-| Database strategy | | | | | | |
-| Security model | | | | | | |
-| Observability | | | | | | |
-| Migration strategy | | | | | | |
-| Extensibility proof | | | | | | |
-| Project risk analysis | | | | | | |
-| Cyber/regulatory risk analysis | | | | | | |
-| Production blockers | | | | | | |
-| Unique contribution | | | | | | |
+| Dimension | ChatGPT | Claude | Gemini | Codex | Z.ai | Kimi | Human |
+|---|---|---|---|---|---|---|---|
+| Architectural thesis | | | | | | | |
+| Platform/payload boundary | | | | | | | |
+| Payload contract | | | | | | | |
+| Isolation model | | | | | | | |
+| Deployment model | | | | | | | |
+| Event or messaging model | | | | | | | |
+| Database strategy | | | | | | | |
+| Security model | | | | | | | |
+| Observability | | | | | | | |
+| Migration strategy | | | | | | | |
+| Extensibility proof | | | | | | | |
+| Project risk analysis | | | | | | | |
+| Cyber/regulatory risk analysis | | | | | | | |
+| Production blockers | | | | | | | |
+| Unique contribution | | | | | | | |
 
 ### Dimension guidance
 
