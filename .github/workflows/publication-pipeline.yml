@@ -101,10 +101,8 @@ jobs:
           brief_source = root / 'publication/executive-brief.md'
           brief_md = work / 'executive-brief.md'
           brief_md.write_text(provenance.replace(config.get('title', 'Mission Framework'), 'Mission Framework — Executive Brief', 1) + brief_source.read_text(encoding='utf-8'), encoding='utf-8')
-          run('pandoc', brief_md, '--from=gfm+yaml_metadata_block', '--standalone', '--toc',
-              '-o', site/'brief/Mission-Framework-Executive-Brief.html')
-          run('pandoc', brief_md, '--from=gfm+yaml_metadata_block', '--standalone', '--toc',
-              '-o', site/'brief/Mission-Framework-Executive-Brief.docx')
+          run('pandoc', brief_md, '--from=gfm+yaml_metadata_block', '--standalone', '--toc', '-o', site/'brief/Mission-Framework-Executive-Brief.html')
+          run('pandoc', brief_md, '--from=gfm+yaml_metadata_block', '--standalone', '--toc', '-o', site/'brief/Mission-Framework-Executive-Brief.docx')
           run('weasyprint', site/'brief/Mission-Framework-Executive-Brief.html', site/'brief/Mission-Framework-Executive-Brief.pdf')
           shutil.copy2(brief_md, site/'brief/Mission-Framework-Executive-Brief.md')
           shutil.copy2(site/'brief/Mission-Framework-Executive-Brief.html', site/'brief/index.html')
@@ -113,10 +111,8 @@ jobs:
           presentation_source = root / 'publication/presentation.md'
           presentation_md = work / 'presentation.md'
           presentation_md.write_text(provenance.replace(config.get('title', 'Mission Framework'), 'Mission Framework — Presentation', 1) + presentation_source.read_text(encoding='utf-8'), encoding='utf-8')
-          run('pandoc', presentation_md, '--from=gfm+yaml_metadata_block', '--slide-level=1',
-              '-o', site/'presentation/Mission-Framework-Introduction.pptx')
-          run('pandoc', presentation_md, '--from=gfm+yaml_metadata_block', '--standalone',
-              '-o', site/'presentation/Mission-Framework-Introduction.html')
+          run('pandoc', presentation_md, '--from=gfm+yaml_metadata_block', '--slide-level=1', '-o', site/'presentation/Mission-Framework-Introduction.pptx')
+          run('pandoc', presentation_md, '--from=gfm+yaml_metadata_block', '--standalone', '-o', site/'presentation/Mission-Framework-Introduction.html')
           run('weasyprint', site/'presentation/Mission-Framework-Introduction.html', site/'presentation/Mission-Framework-Introduction.pdf')
           shutil.copy2(presentation_md, site/'presentation/Mission-Framework-Introduction.md')
           shutil.copy2(site/'presentation/Mission-Framework-Introduction.html', site/'presentation/index.html')
@@ -165,20 +161,41 @@ jobs:
           (site / 'publication-catalog.json').write_text(json.dumps(catalog, indent=2) + '\n', encoding='utf-8')
 
           cards = [
-              ('📘','Book','The complete, coherent reading edition of Mission Framework.','book/','Read online',[('PDF','book/Mission-Framework.pdf'),('EPUB','book/Mission-Framework.epub'),('DOCX','book/Mission-Framework.docx')]),
-              ('📄','Executive Brief','A concise introduction to the purpose, principles, and application of Mission Framework.','brief/','Read brief',[('PDF','brief/Mission-Framework-Executive-Brief.pdf'),('DOCX','brief/Mission-Framework-Executive-Brief.docx')]),
-              ('🎤','Presentation','A presentation-ready introduction for meetings, dialogue, and review.','presentation/','View online',[('PPTX','presentation/Mission-Framework-Introduction.pptx'),('PDF','presentation/Mission-Framework-Introduction.pdf')]),
-              ('📦','Review Package','A complete package for independent review and assessment.','review-package/Mission-Framework-Review-Package.zip','Download ZIP',[]),
+              ('Book','The complete, coherent reading edition of Mission Framework.','book/','Read online',[('PDF','book/Mission-Framework.pdf'),('EPUB','book/Mission-Framework.epub'),('DOCX','book/Mission-Framework.docx')]),
+              ('Executive Brief','A concise introduction to the purpose, principles and application of Mission Framework.','brief/','Read brief',[('PDF','brief/Mission-Framework-Executive-Brief.pdf'),('DOCX','brief/Mission-Framework-Executive-Brief.docx')]),
+              ('Presentation','A presentation-ready introduction for meetings, dialogue and review.','presentation/','View online',[('PPTX','presentation/Mission-Framework-Introduction.pptx'),('PDF','presentation/Mission-Framework-Introduction.pdf')]),
+              ('Review Package','The publication set and review material prepared for independent assessment.','review-package/Mission-Framework-Review-Package.zip','Download ZIP',[]),
           ]
           card_html = []
-          for icon, title, description, primary_href, primary_label, secondary in cards:
+          for title, description, primary_href, primary_label, secondary in cards:
               buttons = [f'<a class="button primary" href="{html.escape(primary_href)}">{html.escape(primary_label)}</a>']
               buttons.extend(f'<a class="button" href="{html.escape(href)}">{html.escape(label)}</a>' for label, href in secondary)
-              card_html.append(f'<article class="card"><div class="icon">{icon}</div><h2>{html.escape(title)}</h2><p>{html.escape(description)}</p><div class="actions">{"".join(buttons)}</div></article>')
+              card_html.append(f'<article class="pub"><h3>{html.escape(title)}</h3><p>{html.escape(description)}</p><div class="actions">{"".join(buttons)}</div></article>')
           source_list = ''.join(f'<li><a href="{html.escape(href)}">{html.escape(name)}</a></li>' for name, href in source_links)
 
-          index = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mission Framework — Publication Hub</title><style>:root{{--bg:#f5f7fb;--surface:#fff;--text:#182033;--muted:#5f6b7a;--line:#dfe5ee;--accent:#2457d6;--accent-dark:#183f9f;--soft:#eaf0ff;--radius:18px}}*{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.6}}header{{background:linear-gradient(135deg,#13254a,#2457d6);color:#fff;padding:4.8rem 1.25rem 4rem}}.wrap{{max-width:1120px;margin:auto}}.eyebrow{{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;opacity:.82}}h1{{font-size:clamp(2.4rem,7vw,5rem);line-height:1.04;margin:.5rem 0 1rem}}.lead{{font-size:1.25rem;max-width:780px;color:#e8eeff}}.status{{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.5rem}}.pill{{background:#ffffff22;border:1px solid #ffffff47;padding:.45rem .75rem;border-radius:999px}}main{{padding:2.5rem 1.25rem 5rem}}.intro{{display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;margin-bottom:2rem}}.panel,.card{{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px #1622400f}}.panel{{padding:1.5rem}}.grid{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}}.card{{padding:1.6rem;display:flex;flex-direction:column;min-height:270px}}.icon{{font-size:2rem}}.card p{{color:var(--muted);flex:1}}.actions{{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1rem}}.button{{display:inline-block;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:.65rem .9rem;font-weight:650;background:#fff;color:var(--text)}}.button.primary{{background:var(--accent);border-color:var(--accent);color:#fff}}.machine,.references{{margin-top:2rem;background:var(--soft);border-radius:var(--radius);padding:1.4rem}}details{{margin-top:2rem;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1.25rem}}footer{{border-top:1px solid var(--line);padding:2rem 1.25rem;color:var(--muted)}}@media(max-width:760px){{.intro,.grid{{grid-template-columns:1fr}}}}</style></head><body><header><div class="wrap"><div class="eyebrow">Official Publication Hub</div><h1>Mission Framework</h1><p class="lead">Choose the publication that fits your purpose. Every edition is generated from the same governed Markdown source.</p><div class="status"><span class="pill">Pre-review</span><span class="pill">Build {short_sha}</span><span class="pill">{len(sources)} sources</span></div></div></header><main class="wrap"><section class="intro"><div class="panel"><h2>Start here</h2><p><strong>New reader:</strong> Executive Brief. <strong>Deep understanding:</strong> the book. <strong>Meeting or talk:</strong> the presentation. <strong>Independent assessment:</strong> Review Package.</p></div><aside class="panel"><h2>Principle</h2><p><strong>Availability is not usability, and usability is not understanding.</strong></p><p>Audience-Adaptive Knowledge Delivery.</p></aside></section><section class="grid">{"".join(card_html)}</section><section class="references"><h2>Reference platforms</h2><p>Mission Framework is exercised through real reference platforms rather than remaining a purely conceptual framework.</p><div class="actions"><a class="button primary" href="https://github.com/froekjaer/timelapse-pro">TimeLapse Pro</a><a class="button primary" href="https://github.com/froekjaer/waterworks-pro">Waterworks Pro</a></div></section><section class="machine"><h2>For machines and verification</h2><div class="actions"><a class="button" href="publication-catalog.json">Publication Catalog</a><a class="button" href="manifests/publication-manifest.json">Provenance Manifest</a><a class="button" href="manifests/SHA256SUMS">SHA-256 Checksums</a></div></section><details><summary>Canonical sources and technical traceability</summary><ul>{source_list}</ul></details></main><footer><div class="wrap">Mission Framework Publication Hub · source {short_sha}</div></footer></body></html>'''
-          (site / 'index.html').write_text(index, encoding='utf-8')
+          # Extract the AI loaders from the canonical preamble so the public page cannot silently drift from it.
+          preamble_path = root / 'docs/operational/AI-BEHAVIOURAL-PREAMBLE.md'
+          preamble = preamble_path.read_text(encoding='utf-8')
+          compact_section = preamble.split('## Compact Loader for AI Custom Instructions', 1)[1].split('## Distribution', 1)[0]
+          compact_loader = next(line[2:] for line in compact_section.splitlines() if line.startswith('> Mission Framework behavioural baseline.'))
+          distribution = preamble.split('## Distribution', 1)[1].split('## Closing Principle', 1)[0]
+          minimal_loader = next(line[2:] for line in distribution.splitlines() if line.startswith('> Follow the current Mission Framework'))
+
+          template = (root / 'publication/site-index.html').read_text(encoding='utf-8')
+          replacements = {
+              '{{SHORT_SHA}}': html.escape(short_sha),
+              '{{SOURCE_COUNT}}': str(len(sources)),
+              '{{COMPACT_LOADER}}': html.escape(compact_loader),
+              '{{MINIMAL_LOADER}}': html.escape(minimal_loader),
+              '{{PUBLICATION_CARDS}}': ''.join(card_html),
+              '{{SOURCE_LIST}}': source_list,
+          }
+          for marker, value in replacements.items():
+              template = template.replace(marker, value)
+          unresolved = [marker for marker in replacements if marker in template]
+          if unresolved:
+              raise SystemExit('Unresolved site template markers: ' + ', '.join(unresolved))
+          (site / 'index.html').write_text(template, encoding='utf-8')
           (site / '.nojekyll').write_text('', encoding='utf-8')
 
           artefacts = []
