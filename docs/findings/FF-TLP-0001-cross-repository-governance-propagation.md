@@ -2,7 +2,8 @@
 
 **Identifier:** FF-TLP-0001
 **Source:** TimeLapse Pro (`froekjaer/timelapse-pro`, PR #240)
-**Status:** Accepted
+**Status (disposition):** Accepted — the governance/architecture decision and its disposition (Extend) are approved. This does **not** mean propagation is complete.
+**Propagation status:** Open — see "Propagation targets" in Disposition below; none are yet closed.
 **Submitted:** 2026-09-15
 **Confidence:** High
 
@@ -59,7 +60,8 @@ Without an explicit, evidence-backed, both-directions propagation obligation wit
 
 ## Disposition
 
-**Status:** Accepted
+**Status (disposition):** Accepted. This records that the governance/architecture decision and its disposition (Extend) have identifiable human approval — it is **not** a claim that downstream propagation is complete. A Finding is not closed merely because its disposition was accepted; closure requires the propagation targets below to be completed and verified, or separately re-dispositioned (see "Verification/closure evidence").
+**Propagation/implementation status:** Open — none of the propagation targets below are yet complete.
 **Rationale:** Identifiable human approval given by TimeLapse Pro's decision authority (Peter), who reviewed the underlying analysis, two independent adversarial review rounds, and explicitly authorised moving from analysis to controlled Mission Framework implementation (TimeLapse PR #240 head `ae30f7a2f58dc3d3ebd4d4330defa138e8ac24bf`). Per "Authority and accountability" above, this constitutes the identifiable human approval required for a consequential change; the change itself is implemented in the pull request that introduces this finding.
 **Owner:** Mission Framework maintainer (accepting/implementing this finding); TimeLapse Pro decision authority for the originating analysis and for the downstream TimeLapse-side propagation items below.
 **Affected repositories/artefacts:** `mission-framework` (`OP-001-Mission-Operational-Preamble.md`, `FRAMEWORK_FINDINGS.md` — this wave); `timelapse-pro`, `collaborative-intelligence`, `Mission-Platform` and their publications (downstream — not implemented in this wave, see propagation targets).
@@ -68,4 +70,6 @@ Without an explicit, evidence-backed, both-directions propagation obligation wit
 - `Mission-Platform`: correct or explain the published-site ADR content that matches no real ADR file, and the ADR index omission of `ADR-0002` — Mission-Platform's own decision.
 - `collaborative-intelligence`: reconcile the published `index.html` with `README.md`/`AI_CONTEXT.md` — Collaborative Intelligence's own decision.
 - `mission-framework` publication: confirm the rendered book reflects this finding's changes once merged to `main` and the publication pipeline runs (not verified in this wave — the pipeline only triggers on push to `main`, and this finding is introduced via a pull request that is not merged in this wave).
+
+**Investigated 2026-09-15 (pre-merge verification):** whether canonical OP-001 (`docs/operational/OP-001-Mission-Operational-Preamble.md`) is intentionally excluded from `publication/book.yml`, or an omission. `git log` shows `book.yml`'s source list was authored by the same person, the same day OP-001 was added (2026-07-22), roughly 2.5 hours later — the curated list includes a sibling operational document (`docs/operational/TRUST-BOOTSTRAP-CREDIBILITY-ONBOARDING-EVIDENCE-MATURITY.md`, headed "Status: Operational concept specification") while excluding OP-001 (headed "Status: Canonical Operational Procedure"). `docs/publication/PUBLICATION-PIPELINE.md` §"Book" defines a book as assembling "a sustained argument or body of knowledge" — a genre TRUST-BOOTSTRAP's narrative/conceptual form fits and OP-001's imperative, checklist-style mandatory procedure does not naturally fit. This is circumstantial but real evidence leaning toward **intentional exclusion (classification A)** rather than drift (B) — but no explicit written rationale sentence stating this was found anywhere in the repository, so it is not conclusively confirmed. `book.yml` is therefore **not modified** by this finding or its implementing pull request. If Peter or the Mission Framework maintainer later confirms the rationale explicitly (or decides otherwise), record that decision here.
 **Verification/closure evidence:** Not yet applicable — this finding remains open at the "Mission Framework extended" milestone; it closes only once the propagation targets above are each either completed and verified, or separately re-dispositioned.

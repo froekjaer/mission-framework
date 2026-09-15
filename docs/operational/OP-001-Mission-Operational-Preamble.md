@@ -295,7 +295,7 @@ Mission Operational Preamble
 ✓ Architectural consistency checked
 ✓ Search-before-create completed
 ✓ Dependencies assessed
-✓ Cross-repository / website impact assessed — propagated
+✓ Cross-repository / website impact assessed — propagated: <what was updated> | no relevant impact found: <evidence> | unresolved gap: <Finding reference>
 ✓ Executed
 ✓ Outcome independently verified
 ```

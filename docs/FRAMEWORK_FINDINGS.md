@@ -29,6 +29,8 @@ Framework Findings may originate from:
 
 Each finding should contain:
 
+_Compatibility note (added 2026-09-15):_ the four fields **Owner**, **Affected repositories/artefacts**, **Propagation targets** and **Verification/closure evidence** were added to this schema after several findings already existed. They apply going forward — to findings raised from this point on, and to any existing finding at its next substantive review or disposition change — and are populated **where known or applicable**, consistent with "should" above rather than a strict validation requirement. Their absence does not retroactively invalidate a finding recorded before this extension; a pre-existing finding remains a valid record of its Source repository's own schema at the time it was raised (see "Known findings (index)" below for pre-existing findings this applies to).
+
 | Field | Requirement |
 |---|---|
 | Identifier | Stable identifier, for example `FF-0001`. Findings hosted outside `mission-framework` should use a repository-indicating prefix (for example `FF-PUB-001`) to avoid collision with another repository's local numbering. |
@@ -138,7 +140,7 @@ This index makes findings discoverable centrally, as required above, without mov
 
 | Identifier | Source | Status (last known) | Disposition |
 |---|---|---|---|
-| [`FF-TLP-0001`](findings/FF-TLP-0001-cross-repository-governance-propagation.md) | `timelapse-pro`, hosted in `mission-framework` | Accepted | Extend (OP-001 Step 7; Framework Findings schema) |
+| [`FF-TLP-0001`](findings/FF-TLP-0001-cross-repository-governance-propagation.md) | `timelapse-pro`, hosted in `mission-framework` | Accepted (disposition) — propagation open, not closed | Extend (OP-001 Step 7; Framework Findings schema) |
 | `FF-PUB-001` | [`-Publication-Pipeline/docs/framework-findings.md`](https://github.com/froekjaer/-Publication-Pipeline/blob/main/docs/framework-findings.md) | Proposed / Open (per source repository) | Not yet dispositioned by Mission Framework |
 | `FF-PUB-002` | [`-Publication-Pipeline/docs/framework-findings.md`](https://github.com/froekjaer/-Publication-Pipeline/blob/main/docs/framework-findings.md) | Proposed / Open (per source repository) | Not yet dispositioned by Mission Framework |
 | `FF-PUB-003` | [`-Publication-Pipeline/docs/framework-findings.md`](https://github.com/froekjaer/-Publication-Pipeline/blob/main/docs/framework-findings.md) | Proposed / Open (per source repository) | Not yet dispositioned by Mission Framework |
