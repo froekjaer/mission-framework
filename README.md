@@ -122,6 +122,7 @@ The current conceptual foundation is documented in:
 - [Canonical Glossary and Mission Loop](GLOSSARY.md) — normative definitions and the common semantic model
 - [Mission Core Admission](docs/MISSION_CORE_ADMISSION.md) — the evidence-based procedure for changing Mission Core
 - [Framework Findings Process](docs/FRAMEWORK_FINDINGS.md) — controlled feedback from implementation and review to canonical semantics
+- [Operational Preamble (OP-001)](docs/operational/OP-001-Mission-Operational-Preamble.md) — the mandatory operational procedure for AI-assisted engineering activity within Mission Framework; canonical and authoritative at this location regardless of publication form
 - [Purpose, Values and Philosophy](docs/PURPOSE_VALUES_PHILOSOPHY.md) — why Mission Framework exists and the values that guide it
 - [Principia Missionis](docs/PRINCIPIA_MISSIONIS.md) — foundational principles
 - [Mission Theory](docs/MISSION_THEORY.md) — missions, dependency descent and the operational layer
