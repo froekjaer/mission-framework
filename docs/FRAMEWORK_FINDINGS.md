@@ -29,9 +29,11 @@ Framework Findings may originate from:
 
 Each finding should contain:
 
+_Compatibility note (added 2026-09-15):_ the four fields **Owner**, **Affected repositories/artefacts**, **Propagation targets** and **Verification/closure evidence** were added to this schema after several findings already existed. They apply going forward — to findings raised from this point on, and to any existing finding at its next substantive review or disposition change — and are populated **where known or applicable**, consistent with "should" above rather than a strict validation requirement. Their absence does not retroactively invalidate a finding recorded before this extension; a pre-existing finding remains a valid record of its Source repository's own schema at the time it was raised (see "Known findings (index)" below for pre-existing findings this applies to).
+
 | Field | Requirement |
 |---|---|
-| Identifier | Stable identifier, for example `FF-0001` |
+| Identifier | Stable identifier, for example `FF-0001`. Findings hosted outside `mission-framework` should use a repository-indicating prefix (for example `FF-PUB-001`) to avoid collision with another repository's local numbering. |
 | Title | Concise statement of the issue |
 | Source | Repository, mission, review or experiment where it arose |
 | Context | Conditions under which the observation was made |
@@ -43,8 +45,14 @@ Each finding should contain:
 | Proposed disposition | Clarify, revise, extend, reject, defer or request more evidence |
 | Confidence | Confidence in the observation and interpretation |
 | Status | Proposed, under review, accepted, rejected, deferred or superseded |
+| Owner | The individual or role accountable for the finding's disposition and any resulting propagation until it is closed, reassigned or superseded |
+| Affected repositories/artefacts | Authoritative and derived repositories, implementations or publications known or suspected to be affected, where known |
+| Propagation targets | Where the disposition requires action outside the repository the finding was raised in, the specific downstream repositories, artefacts or publications that must still be assessed or updated, where known |
+| Verification/closure evidence | Reference to the evidence that propagation was completed and independently verified; recorded when the finding is closed |
 
 Observations and interpretations must be distinguishable. AI-generated analysis must retain provenance and must not be represented as independent empirical evidence.
+
+A finding's presence in this process, or in the index below, records that it *exists* and has been raised through the process. It does not by itself mean the finding has been *accepted*: acceptance is recorded only through the Status field, set through the review below, by an accountable human (see "Authority and accountability").
 
 ## Lifecycle
 
@@ -125,6 +133,22 @@ This creates a bidirectional audit trail:
 ```text
 Reference observation ⇄ Framework Finding ⇄ Canonical disposition
 ```
+
+## Known findings (index)
+
+This index makes findings discoverable centrally, as required above, without moving or restating their content. Listing a finding here records that it exists and is known to Mission Framework; it does **not** by itself change its Status. A finding fully hosted in this repository (Source column links to a file under `docs/findings/`) is the authoritative record for that finding. A finding whose Source column links to another repository remains authoritative there; this table only reproduces its identifier, origin and last-known Status as reported by that repository, and may lag it — the linked source is the source of truth for current status.
+
+| Identifier | Source | Status (last known) | Disposition |
+|---|---|---|---|
+| [`FF-TLP-0001`](findings/FF-TLP-0001-cross-repository-governance-propagation.md) | `timelapse-pro`, hosted in `mission-framework` | Accepted (disposition) — propagation open, not closed | Extend (OP-001 Step 7; Framework Findings schema) |
+| `FF-PUB-001` | [`-Publication-Pipeline/docs/framework-findings.md`](https://github.com/froekjaer/-Publication-Pipeline/blob/main/docs/framework-findings.md) | Proposed / Open (per source repository) | Not yet dispositioned by Mission Framework |
+| `FF-PUB-002` | [`-Publication-Pipeline/docs/framework-findings.md`](https://github.com/froekjaer/-Publication-Pipeline/blob/main/docs/framework-findings.md) | Proposed / Open (per source repository) | Not yet dispositioned by Mission Framework |
+| `FF-PUB-003` | [`-Publication-Pipeline/docs/framework-findings.md`](https://github.com/froekjaer/-Publication-Pipeline/blob/main/docs/framework-findings.md) | Proposed / Open (per source repository) | Not yet dispositioned by Mission Framework |
+| `FF-PUB-004` | [`-Publication-Pipeline/docs/framework-findings.md`](https://github.com/froekjaer/-Publication-Pipeline/blob/main/docs/framework-findings.md) | Proposed / Open (per source repository) | Not yet dispositioned by Mission Framework |
+| `FF-0001` | [`mission-solar-eclipse/docs/findings/FF-0001-sub-agent-delegation.md`](https://github.com/froekjaer/mission-solar-eclipse/blob/main/docs/findings/FF-0001-sub-agent-delegation.md) | Proposed → Deferred (per source repository, self-assessed; "requires external review") | Deferred pending additional mission evidence |
+| `FF-0002` | [`mission-solar-eclipse/docs/findings/FF-0002-mission-loop-entry-points.md`](https://github.com/froekjaer/mission-solar-eclipse/blob/main/docs/findings/FF-0002-mission-loop-entry-points.md) | Proposed (per source repository; "Requires: Mission Framework maintainer review") | Not yet dispositioned by Mission Framework |
+
+Entries added 2026-09-15 as part of resolving an observed practice discrepancy: several findings existed in reference/peripheral repositories without being discoverable from `mission-framework` itself, contrary to the repository-practice rule above. This index closes that discoverability gap without altering any finding's substantive content, provenance or status. `FF-PUB-001..004` and `FF-0001`/`FF-0002` remain open items requiring their own substantive review before any disposition beyond what their source repository already records.
 
 ## Foundation interpretation
 
