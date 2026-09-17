@@ -149,3 +149,13 @@ No reviewer solution is merged automatically. Mission Framework will compare the
 ## Mission owner
 
 Peter Frøkjær is Mission Owner and retains final authority over whether a proposal serves the mission. The Mission Owner does not prescribe the technical solution and should not remove productive diversity before independent submission.
+
+## Prospective improvements (apply from REVIEW-002 onward)
+
+The items below are **prospective** improvements identified after REVIEW-001 was issued. They clarify the standard for future reviews. They do **not** change the requirements that were in force when REVIEW-001 submissions were produced, and a REVIEW-001 submission SHALL NOT be marked non-compliant for not following them.
+
+- **Risk perspectives (from REVIEW-002).** Reviewers SHALL submit two separate risk analyses — project/implementation risk and cyber/regulatory risk — following [`reviews/MIAR/RISK-METHOD.md`](../../reviews/MIAR/RISK-METHOD.md), unless the review invitation explicitly states otherwise. For REVIEW-001, a single combined risk register remains acceptable.
+- **Regulatory horizon.** Reviewers SHALL assess applicability of the instruments listed in [`review-kit/regulatory-horizon.md`](../../review-kit/regulatory-horizon.md) rather than assume every listed instrument applies. The horizon is a governed scanning artefact, not legal advice.
+- **Framework vs. Platform classification.** The Meta Review SHALL classify every synthesis decision as FRAMEWORK, PLATFORM, BOTH, PAYLOAD-SPECIFIC, or DEFERRED (see [`META-REVIEW.md`](META-REVIEW.md)).
+
+These prospective items are recorded here so future reviewers and the Mission Owner share a single source of truth for what improved and when it takes effect.
