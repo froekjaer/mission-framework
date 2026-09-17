@@ -1,0 +1,70 @@
+schema_version: 1
+
+programme:
+  id: collaborative-intelligence
+  name: Collaborative Intelligence
+
+repository:
+  full_name: froekjaer/mission-framework
+  role: canonical-framework
+  lifecycle: foundation
+  status: active
+  version: "1.0"
+  default_branch: main
+
+purpose:
+  summary: >-
+    Canonical semantic and governance foundation for governed missions,
+    including Mission Core, the Mission Loop, evidence, trust and authority.
+
+ownership:
+  owns:
+    - canonical-mission-semantics
+    - mission-core
+    - mission-loop
+    - evidence-semantics
+    - trust-semantics
+    - authority-semantics
+    - governance-semantics
+    - framework-findings-disposition
+  does_not_own:
+    - programme-research-direction
+    - platform-runtime-contracts
+    - mission-specific-domain-evidence
+    - publication-rendering
+
+dependencies:
+  consumes_from:
+    - repository: froekjaer/collaborative-intelligence
+      capability: programme-context
+    - repository: froekjaer/mission-solar-eclipse
+      capability: greenfield-framework-findings
+    - repository: froekjaer/timelapse-pro
+      capability: brownfield-source-evidence
+    - repository: froekjaer/Mission-Platform
+      capability: implementation-findings
+  provides_to:
+    - repository: froekjaer/Mission-Platform
+      capability: canonical-semantics
+    - repository: froekjaer/mission-solar-eclipse
+      capability: canonical-semantics
+    - repository: froekjaer/-Publication-Pipeline
+      capability: canonical-publication-sources
+
+current:
+  baseline: Foundation Release v1.0
+  initiative: Empirical validation, Foundation v1.1 review and REVIEW-001 governance
+  roadmap: ROADMAP.md
+  status_document: README.md
+  architecture_document: docs/ARCHITECTURE.md
+
+publication:
+  include:
+    - README.md
+    - GLOSSARY.md
+    - docs/PRINCIPIA_MISSIONIS.md
+    - docs/MISSION_THEORY.md
+    - docs/REALITY_MODEL.md
+    - docs/EVIDENCE_MODEL.md
+    - docs/ARCHITECTURE.md
+  authority: canonical
